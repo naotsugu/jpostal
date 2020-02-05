@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
+}
+
+application {
+    mainClassName = 'com.mammb.code.jpostal.App'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.mammb.code.jpostal.App'
+    }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Console</title>
+    <style type="text/css">
+        .postal-check {
+            position: relative;
+            margin: 100px;
+        }
+
+        .typeahead, .tt-query, .tt-hint {
+            border: 2px solid #CCCCCC;
+            border-radius: 8px;
+            font-size: 20px;
+            height: 30px;
+            line-height: 30px;
+            outline: medium none;
+            padding: 8px 12px;
+            width: 300px;
+        }
+        .typeahead {
+            background-color: #FFFFFF;
+        }
+        .typeahead:focus {
+            border: 2px solid #0097CF;
+        }
+        .tt-query {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+        .tt-hint {
+            color: #999999;
+        }
+        .tt-menu {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 12px;
+            padding: 8px 0;
+            width: 500px;
+        }
+        .tt-suggestion {
+            font-size: 18px;
+            padding: 3px 10px;
+        }
+        .tt-dataset {
+            padding: 3px 10px;
+        }
+        .tt-suggestion:hover {
+            cursor: pointer;
+            background-color: #0097CF;
+            color: #FFFFFF;
+        }
+        .tt-suggestion p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="postal-check">
+    <h2>Type postal code</h2>
+    <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="1231234">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.0/typeahead.bundle.min.js"></script>
+<script>
+
+    var postal = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: './%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('.typeahead').typeahead({
+        hint: true,
+        highlight: true
+    },
+    {
+        limit: 20,
+        name: 'postal',
+        display: function(item) { return item.code; },
+        source: postal,
+        templates: {
+            notFound: '<div>Not found</div>',
+            pending: '<div>Loading...</div>',
+            suggestion: function(data) {
+                return '<div>' + data.code + ' <small>' + data.prefecture  + data.city + data.town + data.street + '</small></div>';
+            }
+        }
+    });
+</script>
+</body>
+</html>
