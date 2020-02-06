@@ -57,7 +57,6 @@ public class StandardSourceLineEditor implements SourceLine {
             List<String> edited = list.stream()
                     .map(town -> editor.apply(town, pear))
                     .flatMap(List::stream)
-                    .filter(s -> !s.isBlank())
                     .collect(Collectors.toList());
 
             if (edited.isEmpty()) {

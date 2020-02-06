@@ -5,7 +5,7 @@ Japan postal code dictionary(so‐called ken_all.csv) utility.
 
 ## Feature
 
-* Automatically Download japan postal code csv from japanpost.jp
+* Automatically download japan postal code csv from japanpost.jp
 * Format address pretty well
 * Auto update support (monthly)
 * Minimal REST web server included 

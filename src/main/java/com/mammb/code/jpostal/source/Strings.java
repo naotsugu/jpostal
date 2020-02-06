@@ -23,7 +23,7 @@ import java.util.Objects;
 public class Strings {
 
     public static String strip(final String str, final char separatorChar) {
-        if (Objects.isNull(str) || str.isEmpty()) {
+        if (isEmpty(str)) {
             return str;
         }
         if (str.charAt(0) == separatorChar && str.charAt(str.length() - 1) == separatorChar) {
@@ -36,7 +36,7 @@ public class Strings {
 
     public static List<String> split(final String str, final char separatorChar) {
 
-        if (Objects.isNull(str) || str.isEmpty()) {
+        if (isEmpty(str)) {
             return Collections.emptyList();
         }
 
