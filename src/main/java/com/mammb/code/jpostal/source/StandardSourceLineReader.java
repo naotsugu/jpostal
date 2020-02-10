@@ -19,6 +19,11 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * StandardSourceLineReader.
+ *
+ * @author naotsugu
+ */
 public class StandardSourceLineReader extends PostalSourceReader {
 
     private StandardSourceLine buffered;

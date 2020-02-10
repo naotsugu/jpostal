@@ -19,8 +19,17 @@ import com.mammb.code.jpostal.Address;
 
 import java.util.List;
 
+/**
+ * SourceLine.
+ *
+ * @author naotsugu
+ */
 public interface SourceLine {
 
+    /**
+     * Gets address.
+     * @return address
+     */
     List<Address> getAddress();
 
 }

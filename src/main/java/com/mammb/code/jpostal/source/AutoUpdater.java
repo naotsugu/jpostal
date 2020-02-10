@@ -26,6 +26,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+/**
+ * Postal auto updater.
+ *
+ * @author naotsugu
+ */
 public class AutoUpdater {
 
     private static final Logger log = Logger.getLogger(AutoUpdater.class.getName());
@@ -34,15 +39,14 @@ public class AutoUpdater {
     private final Postal postal;
 
 
-    public AutoUpdater(Postal postal) {
+    private AutoUpdater(Postal postal) {
         this.postal = postal;
         this.executor = Executors.newSingleThreadScheduledExecutor();
     }
 
 
     public static AutoUpdater of(Postal postal) {
-        AutoUpdater updater = new AutoUpdater(postal);
-        return updater;
+        return new AutoUpdater(postal);
     }
 
 

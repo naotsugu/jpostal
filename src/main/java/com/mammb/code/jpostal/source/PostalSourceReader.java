@@ -24,6 +24,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
+/**
+ * PostalSourceReader.
+ *
+ * @author naotsugu
+ */
 public abstract class PostalSourceReader implements Closeable {
 
     private final BufferedReader bufferedReader;

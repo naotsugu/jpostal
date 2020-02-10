@@ -29,6 +29,11 @@ import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/**
+ * PostalSourceFetcher.
+ *
+ * @author naotsugu
+ */
 public class PostalSourceFetcher {
 
     private final Path baseDir;

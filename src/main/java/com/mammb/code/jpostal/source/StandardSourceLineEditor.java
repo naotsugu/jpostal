@@ -25,6 +25,11 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * StandardSourceLineEditor.
+ *
+ * @author naotsugu
+ */
 public class StandardSourceLineEditor implements SourceLine {
 
     private static final Logger log = Logger.getLogger(StandardSourceLineEditor.class.getName());

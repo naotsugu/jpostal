@@ -23,6 +23,11 @@ import java.net.InetSocketAddress;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+/**
+ * PostalServer.
+ *
+ * @author naotsugu
+ */
 public class PostalServer {
 
     private static final Logger log = Logger.getLogger(PostalServer.class.getName());
@@ -45,9 +50,11 @@ public class PostalServer {
         return new PostalServer(postal, 8080);
     }
 
+
     public static PostalServer of(Postal postal, int port) {
         return new PostalServer(postal, port);
     }
+
 
     public void start() {
         server.start();

@@ -20,6 +20,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * String utility.
+ *
+ * @author naotsugu
+ */
 public class Strings {
 
     public static String strip(final String str, final char separatorChar) {
@@ -31,7 +36,6 @@ public class Strings {
         } else {
             return str;
         }
-
     }
 
     public static List<String> split(final String str, final char separatorChar) {
@@ -60,6 +64,7 @@ public class Strings {
         }
         return list;
     }
+
 
     public static int countMatches(final String str, final char ch) {
         if (isEmpty(str)) {

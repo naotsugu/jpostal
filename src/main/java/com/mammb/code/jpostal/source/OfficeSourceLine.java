@@ -74,14 +74,17 @@ public class OfficeSourceLine implements SourceLine {
         street = Strings.strip(line.get(6), '"');
     }
 
+
     public static OfficeSourceLine of(String origin) {
         return new OfficeSourceLine(origin);
     }
+
 
     @Override
     public String toString() {
         return String.join(",", code, pref, city, town, "");
     }
+
 
     @Override
     public List<Address> getAddress() {

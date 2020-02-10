@@ -31,6 +31,11 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handler of http.
+ *
+ * @author naotsugu
+ */
 class PostalHandler implements HttpHandler {
 
     private static final Logger log = Logger.getLogger(PostalHandler.class.getName());

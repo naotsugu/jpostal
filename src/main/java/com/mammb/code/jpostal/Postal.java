@@ -40,6 +40,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Postal.
+ *
+ * @author naotsugu
+ */
 public class Postal {
 
     private static final Logger log = Logger.getLogger(Postal.class.getName());

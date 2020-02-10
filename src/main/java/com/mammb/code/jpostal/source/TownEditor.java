@@ -19,6 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * TownEditor.
+ *
+ * @author naotsugu
+ */
 public interface TownEditor {
 
     List<String> empty = Arrays.asList("");
@@ -40,11 +45,14 @@ public interface TownEditor {
             // 1 records
             (town, org) -> town.endsWith("（全域）") ? removeBrackets(town) : keep(town),
 
+            // 48 records 名駅ミッドランドスクエア
+            (town, org) -> town.endsWith("（高層棟）") ? remove(town, "（高層棟）") : keep(town),
+
             // 81 records
             (town, org) -> town.endsWith("（地階・階層不明）") ? removeBrackets(town) : keep(town),
 
-            // 48 records 名駅ミッドランドスクエア
-            (town, org) -> town.endsWith("（高層棟）") ? removeBrackets(town) : keep(town),
+            // 32 records
+            (town, org) -> town.endsWith("（次のビルを除く）") ? removeBrackets(town) : keep(town),
 
             // 3170 records ex) 霞が関霞が関ビル（１０階）-> 霞が関霞が関ビル１０階
             (town, org) -> town.matches(".*（[０-９]+階）") ? extractBrackets(town) : keep(town),
@@ -60,6 +68,9 @@ public interface TownEditor {
 
             // 1 records
             (town, org) -> town.endsWith("（無番地）") ? removeBrackets(town) : keep(town),
+
+            // 564 records
+            (town, org) -> town.endsWith("（その他）") ? removeBrackets(town) : keep(town),
 
             // 36 records
             (town, org) -> town.endsWith("を除く）") ? removeBrackets(town) : keep(town),
@@ -178,6 +189,9 @@ public interface TownEditor {
         return Arrays.asList(input.substring(0, input.lastIndexOf("（")));
     }
 
+    private static List<String> remove(String input, String str) {
+        return Arrays.asList(input.replace(input, str));
+    }
 
     private static List<String> splitExcludeSqBrackets(String str) {
         // ex) （１丁目、２丁目「６５１、６６２、６６８番地」以外、６７８、６８７番地）

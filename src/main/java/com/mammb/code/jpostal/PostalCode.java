@@ -17,6 +17,11 @@ package com.mammb.code.jpostal;
 
 import java.util.Objects;
 
+/**
+ * PostalCode.
+ *
+ * @author naotsugu
+ */
 public class PostalCode {
 
     private final String code;

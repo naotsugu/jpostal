@@ -20,6 +20,11 @@ import com.mammb.code.jpostal.server.PostalServer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * App.
+ *
+ * @author naotsugu
+ */
 public class App {
 
     private static final Logger log = Logger.getLogger(App.class.getName());

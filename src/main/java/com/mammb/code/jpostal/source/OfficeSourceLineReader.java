@@ -17,6 +17,11 @@ package com.mammb.code.jpostal.source;
 
 import java.nio.file.Path;
 
+/**
+ * OfficeSourceLineReader.
+ *
+ * @author naotsugu
+ */
 public class OfficeSourceLineReader extends PostalSourceReader {
 
     private OfficeSourceLineReader(Path path) {

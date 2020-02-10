@@ -15,6 +15,11 @@
  */
 package com.mammb.code.jpostal.source;
 
+/**
+ * Settings.
+ *
+ * @author naotsugu
+ */
 public class Settings {
 
     private final PostalSource standardSource;

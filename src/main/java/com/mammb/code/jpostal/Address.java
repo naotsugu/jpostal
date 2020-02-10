@@ -17,6 +17,11 @@ package com.mammb.code.jpostal;
 
 import java.util.Objects;
 
+/**
+ * Address.
+ *
+ * @author naotsugu
+ */
 public class Address {
 
     private final PostalCode code;
