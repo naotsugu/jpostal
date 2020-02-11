@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * App.
+ * Application entry point.
  *
  * @author naotsugu
  */

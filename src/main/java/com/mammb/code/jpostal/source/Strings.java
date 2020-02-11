@@ -25,8 +25,21 @@ import java.util.Objects;
  *
  * @author naotsugu
  */
-public class Strings {
+public abstract class Strings {
 
+    /**
+     * Strips character from the start and end of a String.
+     *
+     * <pre>{@code
+     * Strings.strip("abc",   '*');    // abc
+     * Strings.strip("*abc*", '*');    // abc
+     * Strings.strip("*abc",  '*');    // *abc
+     * }</pre>
+     *
+     * @param str the String to remove characters from, may be null
+     * @param separatorChar the character to remove
+     * @return the stripped String
+     */
     public static String strip(final String str, final char separatorChar) {
         if (isEmpty(str)) {
             return str;
@@ -38,6 +51,14 @@ public class Strings {
         }
     }
 
+
+    /**
+     * Splits the provided text into a List, separator specified.
+     *
+     * @param str the String to parse, may be null
+     * @param separatorChar the character used as the delimiter
+     * @return the List of parsed Strings
+     */
     public static List<String> split(final String str, final char separatorChar) {
 
         if (isEmpty(str)) {
@@ -66,6 +87,13 @@ public class Strings {
     }
 
 
+    /**
+     * Counts how many times the char appears in the given String.
+     *
+     * @param str the String to check, may be null
+     * @param ch the char to count
+     * @return the number of occurrences
+     */
     public static int countMatches(final String str, final char ch) {
         if (isEmpty(str)) {
             return 0;
@@ -79,6 +107,13 @@ public class Strings {
         return count;
     }
 
+
+    /**
+     * Check whether the given {@code String} is empty ({@code ""}) or {@code null}.
+     *
+     * @param str the String to check, may be null
+     * @return {@code true} if the String is empty or null
+     */
     public static boolean isEmpty(final String str) {
         return Objects.isNull(str) || str.isEmpty();
     }

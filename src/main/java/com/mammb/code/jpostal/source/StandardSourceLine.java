@@ -92,12 +92,13 @@ class StandardSourceLine implements SourceLine {
     }
 
 
-    public void marge(StandardSourceLine that) {
+    public StandardSourceLine marge(StandardSourceLine that) {
         if (!this.town.equals(that.town)) {
             this.town += that.town;
         }
         this.openCount  += that.openCount;
         this.closeCount += that.closeCount;
+        return this;
     }
 
 

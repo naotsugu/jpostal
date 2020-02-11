@@ -30,6 +30,9 @@ public class PostalCode {
     private PostalCode(String code) {
         Objects.requireNonNull(code);
         this.code = code.contains("-") ? code.replace("-", "") : code;
+        if (!this.code.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException(code);
+        }
     }
 
 
