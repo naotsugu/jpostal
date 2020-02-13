@@ -28,9 +28,19 @@ public interface TownEditor {
 
     List<String> empty = Arrays.asList("");
 
+    /**
+     * Apply edit rules.
+     * @param town the town name
+     * @param org the original line
+     * @return the list of edited result
+     */
     List<String> apply(String town, StandardSourceLine org);
 
 
+    /**
+     * Gets the standard editors.
+     * @return the editors
+     */
     static List<TownEditor> standardEditors() {
         return Arrays.asList(
 
@@ -130,7 +140,10 @@ public interface TownEditor {
         );
     }
 
-
+    /**
+     * Gets the simple editors.
+     * @return the editors
+     */
     static List<TownEditor> simpleEditors() {
         return Arrays.asList(
                 (town, org) -> town.contains("以下に掲載がない場合") ? empty : keep(town),

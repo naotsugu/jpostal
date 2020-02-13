@@ -27,8 +27,8 @@ import java.util.List;
 public interface SourceLine {
 
     /**
-     * Gets address.
-     * @return address
+     * Gets the address.
+     * @return the address
      */
     List<Address> getAddress();
 

@@ -46,21 +46,37 @@ public class PostalServer {
     }
 
 
+    /**
+     * Create a server instance.
+     * @param postal the Postal
+     * @return PostalServer
+     */
     public static PostalServer of(Postal postal) {
         return new PostalServer(postal, 8080);
     }
 
 
+    /**
+     * Create a server instance.
+     * @param postal the Postal
+     * @param port the port to listen on
+     * @return PostalServer
+     */
     public static PostalServer of(Postal postal, int port) {
         return new PostalServer(postal, port);
     }
 
 
+    /**
+     * Starts this server.
+     */
     public void start() {
         server.start();
     }
 
-
+    /**
+     * Stops this server.
+     */
     public void stop() {
         if (Objects.nonNull(server)) {
             server.stop(0);

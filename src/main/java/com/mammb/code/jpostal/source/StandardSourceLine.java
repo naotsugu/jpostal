@@ -79,8 +79,13 @@ class StandardSourceLine implements SourceLine {
     }
 
 
-    public static StandardSourceLine of(String origin) {
-        return new StandardSourceLine(origin);
+    /**
+     * Create the {@code StandardSourceLine} by the given record.
+     * @param record the recode
+     * @return the {@code StandardSourceLine} instance
+     */
+    public static StandardSourceLine of(String record) {
+        return new StandardSourceLine(record);
     }
 
 

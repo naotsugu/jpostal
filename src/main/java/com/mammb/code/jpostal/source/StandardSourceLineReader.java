@@ -37,17 +37,28 @@ public class StandardSourceLineReader extends PostalSourceReader {
                 ? TownEditor.standardEditors() : editors;
     }
 
-
+    /**
+     * Create the {@code StandardSourceLineReader} instance.
+     * @param path the source path
+     * @param editors the list of {@code TownEditor}
+     * @return the {@code StandardSourceLineReader} instance
+     */
     public static StandardSourceLineReader of(Path path, List<TownEditor> editors) {
         return new StandardSourceLineReader(path, editors);
     }
 
 
+    /**
+     * Create the {@code StandardSourceLineReader} instance.
+     * @param path the source path
+     * @return the {@code StandardSourceLineReader} instance
+     */
     public static StandardSourceLineReader of(Path path) {
         return new StandardSourceLineReader(path, null);
     }
 
 
+    @Override
     public SourceLine readNext() {
 
         for (;;) {

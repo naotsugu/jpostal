@@ -75,8 +75,13 @@ public class OfficeSourceLine implements SourceLine {
     }
 
 
-    public static OfficeSourceLine of(String origin) {
-        return new OfficeSourceLine(origin);
+    /**
+     * Create the {@code OfficeSourceLine} by the given record.
+     * @param record the record
+     * @return the {@code OfficeSourceLine}
+     */
+    public static OfficeSourceLine of(String record) {
+        return new OfficeSourceLine(record);
     }
 
 

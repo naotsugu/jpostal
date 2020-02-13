@@ -43,6 +43,10 @@ public abstract class PostalSourceReader implements Closeable {
         }
     }
 
+    /**
+     * Reads a next line as {@code SourceLine}.
+     * @return the {@code SourceLine}
+     */
     public abstract SourceLine readNext();
 
     protected String readLine() {

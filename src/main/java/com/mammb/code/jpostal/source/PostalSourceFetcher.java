@@ -48,16 +48,30 @@ public class PostalSourceFetcher {
     }
 
 
+    /**
+     * Create the {@code PostalSourceFetcher} instance.
+     * @param postalSource the source of postal
+     * @return the {@code PostalSourceFetcher} instance
+     */
     public static PostalSourceFetcher of(PostalSource postalSource) {
         return new PostalSourceFetcher(Paths.get("./"), postalSource.url(), false);
     }
 
 
+    /**
+     * Create the {@code PostalSourceFetcher} instance.
+     * @param postalSource the source of postal
+     * @return the {@code PostalSourceFetcher} instance
+     */
     public static PostalSourceFetcher recycleOf(PostalSource postalSource) {
         return new PostalSourceFetcher(Paths.get("./"), postalSource.url(), true);
     }
 
 
+    /**
+     * Fetch the postal dictionary csv.
+     * @return the path of fetched file
+     */
     public Path fetch() {
         Path zipPath = baseDir.resolve(fetchedPath(sourceUrl));
         if (!(recycle && Files.exists(zipPath))) {

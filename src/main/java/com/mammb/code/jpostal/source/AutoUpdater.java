@@ -45,11 +45,19 @@ public class AutoUpdater {
     }
 
 
+    /**
+     * Create the {@code AutoUpdater} instance.
+     * @param postal tha Postal
+     * @return the {@code AutoUpdater} instance
+     */
     public static AutoUpdater of(Postal postal) {
         return new AutoUpdater(postal);
     }
 
 
+    /**
+     * Submits a next update task.
+     */
     public void schedule() {
         LocalDate date = LocalDate.now().withDayOfMonth(1).plusMonths(1L);
         LocalDateTime dt = date.atStartOfDay().plusMinutes(new Random().nextInt(60));

@@ -32,7 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Handler of http.
+ * Handler of http request.
  *
  * @author naotsugu
  */

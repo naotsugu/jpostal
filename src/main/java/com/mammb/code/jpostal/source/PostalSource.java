@@ -26,10 +26,23 @@ import java.util.List;
  */
 public interface PostalSource {
 
+    /**
+     * Gets the source url.
+     * @return the source url
+     */
     String url();
 
+    /**
+     * Gets the {@code PostalSourceReader}.
+     * @param path the path of source csv file
+     * @return the {@code PostalSourceReader}
+     */
     PostalSourceReader reader(Path path);
 
+    /**
+     * Add {@code TownEditor}.
+     * @param editors the list of {@code TownEditor}
+     */
     void with(List<TownEditor> editors);
 
 
@@ -39,14 +52,17 @@ public interface PostalSource {
 
             private List<TownEditor> editors = new ArrayList<>();
 
+            @Override
             public String url() {
                 return "https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip";
             }
 
+            @Override
             public PostalSourceReader reader(Path path) {
                 return StandardSourceLineReader.of(path, editors);
             }
 
+            @Override
             public void with(List<TownEditor> editors) {
                 this.editors.addAll(editors);
             }
@@ -57,14 +73,17 @@ public interface PostalSource {
 
         return new PostalSource() {
 
+            @Override
             public String url() {
                 return "https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip";
             }
 
+            @Override
             public PostalSourceReader reader(Path path) {
                 return OfficeSourceLineReader.of(path);
             }
 
+            @Override
             public void with(List<TownEditor> editors) {
                 // Unsupported
             }

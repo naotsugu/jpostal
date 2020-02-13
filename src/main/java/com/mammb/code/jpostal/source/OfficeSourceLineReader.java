@@ -18,7 +18,7 @@ package com.mammb.code.jpostal.source;
 import java.nio.file.Path;
 
 /**
- * OfficeSourceLineReader.
+ * Reader of {@code OfficeSourceLine}.
  *
  * @author naotsugu
  */
@@ -29,11 +29,17 @@ public class OfficeSourceLineReader extends PostalSourceReader {
     }
 
 
+    /**
+     * Create a {@code OfficeSourceLineReader} instance.
+     * @param path a source path
+     * @return {@code OfficeSourceLineReader} instance
+     */
     public static OfficeSourceLineReader of(Path path) {
         return new OfficeSourceLineReader(path);
     }
 
 
+    @Override
     public SourceLine readNext() {
         return OfficeSourceLine.of(readLine());
     }
