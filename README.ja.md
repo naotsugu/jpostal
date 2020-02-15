@@ -14,6 +14,14 @@
 
 ## Usage
 
+以下の依存を追加します.
+
+```groovy
+dependencies {
+    implementation 'com.mammb:jpostal:0.1.0'
+}
+```
+
 `Postal` を生成して初期化します.
 
 ```java
