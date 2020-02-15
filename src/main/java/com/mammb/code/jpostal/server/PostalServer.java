@@ -47,7 +47,7 @@ public class PostalServer {
 
 
     /**
-     * Create a server instance.
+     * Create the server instance.
      * @param postal the Postal
      * @return PostalServer
      */
@@ -57,7 +57,7 @@ public class PostalServer {
 
 
     /**
-     * Create a server instance.
+     * Create the server instance.
      * @param postal the Postal
      * @param port the port to listen on
      * @return PostalServer

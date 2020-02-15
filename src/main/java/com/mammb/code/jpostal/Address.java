@@ -40,30 +40,60 @@ public class Address {
     }
 
 
+    /**
+     * Create the {@code Address}.
+     * @param code the postal code
+     * @param prefecture the prefecture name
+     * @param city the city name
+     * @param town the town name
+     * @param street the street name
+     * @return the {@code Address}
+     */
     public static Address of(PostalCode code, String prefecture, String city, String town, String street) {
         return new Address(code, prefecture, city, town, street);
     }
 
+
+    /**
+     * Get the postal code.
+     * @return the postal code
+     */
     public PostalCode getCode() {
         return code;
     }
 
 
+    /**
+     * Get the prefecture name.
+     * @return the prefecture name
+     */
     public String getPrefecture() {
         return prefecture;
     }
 
 
+    /**
+     * Get the city name.
+     * @return the city name
+     */
     public String getCity() {
         return city;
     }
 
 
+    /**
+     * Get the town name.
+     * @return the town name
+     */
     public String getTown() {
         return town;
     }
 
 
+    /**
+     * Get the street name.
+     * @return the street name
+     */
     public String getStreet() {
         return street;
     }
@@ -100,6 +130,10 @@ public class Address {
     }
 
 
+    /**
+     * Get the json string.
+     * @return the json string
+     */
     public String toJsonString() {
         return String.format(
                 "{'code': '%s', 'prefecture': '%s', 'city': '%s', 'town': '%s', 'street': '%s'}".replace("'", "\""),

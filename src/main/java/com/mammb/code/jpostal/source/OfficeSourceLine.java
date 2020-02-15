@@ -24,7 +24,6 @@ import java.util.Objects;
 
 /**
  * OfficeSourceLine.
- * <p>
  * <pre>
  * 0. 大口事業所の所在地のJISコード（5バイト）
  * 1. 大口事業所名（カナ）（100バイト）

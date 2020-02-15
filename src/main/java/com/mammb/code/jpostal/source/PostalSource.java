@@ -27,17 +27,18 @@ import java.util.List;
 public interface PostalSource {
 
     /**
-     * Gets the source url.
+     * Get the source url.
      * @return the source url
      */
     String url();
 
     /**
-     * Gets the {@code PostalSourceReader}.
+     * Get the {@code PostalSourceReader}.
      * @param path the path of source csv file
      * @return the {@code PostalSourceReader}
      */
     PostalSourceReader reader(Path path);
+
 
     /**
      * Add {@code TownEditor}.
@@ -46,6 +47,10 @@ public interface PostalSource {
     void with(List<TownEditor> editors);
 
 
+    /**
+     * Get the standard source.
+     * @return standard source
+     */
     static PostalSource standardSource() {
 
         return new PostalSource() {
@@ -69,6 +74,10 @@ public interface PostalSource {
         };
     }
 
+    /**
+     * Get the office source.
+     * @return office source
+     */
     static PostalSource officeSource() {
 
         return new PostalSource() {

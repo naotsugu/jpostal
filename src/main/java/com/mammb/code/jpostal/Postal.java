@@ -65,35 +65,73 @@ public class Postal {
     }
 
 
+    /**
+     * Create the {@code Postal} instance.
+     * @return {@code Postal}
+     */
     public static Postal of() {
         return new Postal(Settings.of());
     }
 
+
+    /**
+     * Set the fineAddressSupport.
+     * @param support the fineAddressSupport
+     * @return {@code Postal}
+     */
     public Postal fineAddressSupport(boolean support) {
         this.settings.fineAddressSupport(support);
         return this;
     }
 
+
+    /**
+     * Set the leftMatchSupport.
+     * @param support the leftMatchSupport
+     * @return {@code Postal}
+     */
     public Postal leftMatchSupport(boolean support) {
         this.settings.leftMatchSupport(support);
         return this;
     }
 
+
+    /**
+     * Set the officeSourceSupport.
+     * @param support the officeSourceSupport
+     * @return {@code Postal}
+     */
     public Postal officeSourceSupport(boolean support) {
         this.settings.officeSourceSupport(support);
         return this;
     }
 
+
+    /**
+     * Set the autoUpdateSupport.
+     * @param support the autoUpdateSupport
+     * @return {@code Postal}
+     */
     public Postal autoUpdateSupport(boolean support) {
         this.settings.autoUpdateSupport(support);
         return this;
     }
 
+
+    /**
+     * Set the leftMatchLimitCount.
+     * @param count the leftMatchLimitCount
+     * @return {@code Postal}
+     */
     public Postal leftMatchLimitCount(int count) {
         this.settings.leftMatchLimitCount(count);
         return this;
     }
 
+
+    /**
+     * Initialize postal.
+     */
     public void initialize() {
         final Lock writeLock = lock.writeLock();
         try {
@@ -109,6 +147,9 @@ public class Postal {
     }
 
 
+    /**
+     * Full initialize.
+     */
     public void initializeAll() {
         final Lock writeLock = lock.writeLock();
         try {
@@ -126,6 +167,11 @@ public class Postal {
     }
 
 
+    /**
+     * Get the address list by the given postal code.
+     * @param code the postal code
+     * @return the address list
+     */
     public Collection<Address> get(PostalCode code) {
         final Lock readLock = lock.readLock();
         try {
@@ -137,6 +183,11 @@ public class Postal {
     }
 
 
+    /**
+     * Get the address list by the given query.
+     * @param query the given query
+     * @return the address list
+     */
     public Collection<Address> get(String query) {
         final Lock readLock = lock.readLock();
         try {
@@ -153,6 +204,10 @@ public class Postal {
     }
 
 
+    /**
+     * Get the setting of leftMatchSupport.
+     * @return the setting of leftMatchSupport
+     */
     public boolean leftMatchSupport() {
         return settings.leftMatchSupport();
     }

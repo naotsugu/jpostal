@@ -30,8 +30,8 @@ public class OfficeSourceLineReader extends PostalSourceReader {
 
 
     /**
-     * Create a {@code OfficeSourceLineReader} instance.
-     * @param path a source path
+     * Create the {@code OfficeSourceLineReader} instance.
+     * @param path the source path
      * @return {@code OfficeSourceLineReader} instance
      */
     public static OfficeSourceLineReader of(Path path) {

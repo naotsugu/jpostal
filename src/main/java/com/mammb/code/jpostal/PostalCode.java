@@ -36,11 +36,20 @@ public class PostalCode {
     }
 
 
+    /**
+     * Create the {@code PostalCode}.
+     * @param code the postal code string
+     * @return the {@code PostalCode}
+     */
     public static PostalCode of(String code) {
         return new PostalCode(code);
     }
 
 
+    /**
+     * Get the code string.
+     * @return the code string
+     */
     public String getCode() {
         return code;
     }

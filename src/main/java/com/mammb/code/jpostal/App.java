@@ -29,6 +29,10 @@ public class App {
 
     private static final Logger log = Logger.getLogger(App.class.getName());
 
+    /**
+     * Start tha App.
+     * @param args the args
+     */
     public static void main(String[] args) {
 
         Postal postal = Postal.of()

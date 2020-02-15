@@ -31,7 +31,8 @@ public class Settings {
     private boolean fineAddressSupport;
     private int leftMatchLimitCount;
 
-    public Settings(
+
+    private Settings(
             PostalSource standardSource,
             PostalSource officeSource,
             boolean fineAddressSupport,
@@ -49,6 +50,10 @@ public class Settings {
     }
 
 
+    /**
+     * Create the {@code Settings} instance.
+     * @return {@code Settings} instance
+     */
     public static Settings of() {
         return new Settings(
                 PostalSource.standardSource(),
@@ -61,26 +66,50 @@ public class Settings {
     }
 
 
+    /**
+     * Set the leftMatchSupport.
+     * @param support leftMatchSupport
+     */
     public void leftMatchSupport(boolean support) {
         leftMatchSupport = support;
     }
 
+    /**
+     * Set the fineAddressSupport.
+     * @param support fineAddressSupport
+     */
     public void fineAddressSupport(boolean support) {
         fineAddressSupport = support;
     }
 
+    /**
+     * Set the autoUpdateSupport.
+     * @param support autoUpdateSupport
+     */
     public void autoUpdateSupport(boolean support) {
         autoUpdateSupport = support;
     }
 
+    /**
+     * Set the officeSourceSupport.
+     * @param support officeSourceSupport
+     */
     public void officeSourceSupport(boolean support) {
         officeSourceSupport = support;
     }
 
+    /**
+     * Set the leftMatchLimitCount.
+     * @param count leftMatchLimitCount
+     */
     public void leftMatchLimitCount(int count) {
         leftMatchLimitCount = count;
     }
 
+    /**
+     * Get the standardSource.
+     * @return standardSource
+     */
     public PostalSource standardSource() {
         if (fineAddressSupport) {
             standardSource.with(TownEditor.standardEditors());
@@ -90,18 +119,34 @@ public class Settings {
         return standardSource;
     }
 
+    /**
+     * Get the officeSource.
+     * @return officeSource
+     */
     public PostalSource officeSource() {
         return officeSourceSupport ? officeSource : null;
     }
 
+    /**
+     * Get the leftMatchSupport.
+     * @return leftMatchSupport
+     */
     public boolean leftMatchSupport() {
         return leftMatchSupport;
     }
 
+    /**
+     * Get the autoUpdateSupport.
+     * @return autoUpdateSupport
+     */
     public boolean autoUpdateSupport() {
         return autoUpdateSupport;
     }
 
+    /**
+     * Get the leftMatchLimitCount.
+     * @return leftMatchLimitCount
+     */
     public int leftMatchLimitCount() {
         return leftMatchLimitCount;
     }
