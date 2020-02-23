@@ -2,6 +2,9 @@
 
 郵便番号辞書(いわゆる ken_all.csv)のユーティリティです.
 
+![jpostal](doc/images/search.gif)
+
+<br/>
 
 ## Feature
 
@@ -11,6 +14,7 @@
 * REST web サーバ付属 
 * 依存ライブラリ無し
 
+<br/>
 
 ## Usage
 
@@ -40,11 +44,14 @@ Collection<Address> addresses = postal.get(code);
 // {"code": "1050014", "prefecture": "東京都", "city": "港区", "town": "芝", "street": ""}]
 ```
 
-
+<br/>
 
 ## PostalServer
 
 REST サーバが必要な場合は jpostal.jar を実行します.
+
+
+直接ビルドして実行するか、`https://github.com/naotsugu/jpostal/releases` から `jpostal.jar` をダウンロードして実行します.
 
 ```
 $ git clone https://github.com/naotsugu/jpostal.git
@@ -65,6 +72,7 @@ server.start();
 
 `http://localhost:8080/postal/console.html` にアクセスすれば簡易的な住所チェック用のコンソールが表示されます.
 
+<br/>
 
 ## Options
 
@@ -88,6 +96,7 @@ Postal postal = Postal.of()
 | `officeSourceSupport`  | `false` |
 | `autoUpdateSupport`    | `false` |
 
+<br/>
 
 ## Details
 

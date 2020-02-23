@@ -2,6 +2,9 @@
 
 Japan postal code dictionary(so‐called ken_all.csv) utility.
 
+![jpostal](doc/images/search.gif)
+
+<br/>
 
 ## Feature
 
@@ -11,6 +14,7 @@ Japan postal code dictionary(so‐called ken_all.csv) utility.
 * Minimal REST web server included 
 * No dependencies (only jdk)
 
+<br/>
 
 ## Usage
 
@@ -40,11 +44,15 @@ Collection<Address> addresses = postal.get(code);
 // {"code": "1050014", "prefecture": "東京都", "city": "港区", "town": "芝", "street": ""}]
 ```
 
-
+<br/>
 
 ## PostalServer
 
 If you needs rest server, run jpostal.jar.
+
+Get `jpostal.jar` from `https://github.com/naotsugu/jpostal/releases` and run it.
+
+Or clone and build and run.
 
 ```
 $ git clone https://github.com/naotsugu/jpostal.git
@@ -65,6 +73,7 @@ Go to `http://localhost:8080/postal/105001`, then you gets address by json forma
 
 In addition, console page is `http://localhost:8080/postal/console.html`.
 
+<br/>
 
 ## Options
 
@@ -86,6 +95,7 @@ Postal postal = Postal.of()
 | `officeSourceSupport`  | `false` |
 | `autoUpdateSupport`    | `false` |
 
+<br/>
 
 ## Details
 

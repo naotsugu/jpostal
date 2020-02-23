@@ -15,6 +15,7 @@
  */
 package com.mammb.code.jpostal;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -22,7 +23,7 @@ import java.util.Objects;
  *
  * @author naotsugu
  */
-public class PostalCode {
+public class PostalCode implements Serializable {
 
     private final String code;
 

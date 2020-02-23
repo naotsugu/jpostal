@@ -116,22 +116,22 @@ public interface TownEditor {
             // 1 records ex) 大江（１丁目、２丁目「６５１、６６２、６６８番地」以外、
             (town, org) -> town.endsWith("」以外）") ? removeParen(town) : keep(town),
 
-            // 1 records ex) 南山（４３０番地以上「１７７０－１～２、
+            // 1 records ex) 南山（４３０番地以上「１７７０－１〜２、
             (town, org) -> town.contains("番地以上") ? removeParen(town) : keep(town),
 
             // 13 records
             (town, org) -> town.contains("「") && town.contains("」") ? removeSqBrackets(town) : keep(town),
 
-            // ex) 西瑞江（４丁目１～２番・１０～２７番、５丁目）-> 西瑞江
+            // ex) 西瑞江（４丁目１〜２番・１０〜２７番、５丁目）-> 西瑞江
             (town, org) -> town.matches(".*（.*・.*）.*") ? removeParen(town) : keep(town),
 
-            // ex) 中央本町（３～５丁目）-> 中央本町
-            (town, org) -> town.matches(".*（.*～.*）.*") ? removeParen(town) : keep(town),
+            // ex) 中央本町（３〜５丁目）-> 中央本町
+            (town, org) -> town.matches(".*（.*〜.*）.*") ? removeParen(town) : keep(town),
 
             // 29 records 岩手県 地割
-            (town, org) -> town.matches(".*第.*地割～第.*地割.*") ? Arrays.asList(town.replaceAll("第.*地割～第.*地割", "")) : keep(town),
+            (town, org) -> town.matches(".*第.*地割〜第.*地割.*") ? Arrays.asList(town.replaceAll("第.*地割〜第.*地割", "")) : keep(town),
             //  9 records 岩手県 地割
-            (town, org) -> town.matches(".*地割～.*地割.*") ? Arrays.asList(town.replaceAll("[０-９]+地割～.*", "")) : keep(town),
+            (town, org) -> town.matches(".*地割〜.*地割.*") ? Arrays.asList(town.replaceAll("[０-９]+地割〜.*", "")) : keep(town),
             // 10 records 岩手県 地割
             (town, org) -> town.contains("地割、") ? Arrays.asList(town.split("、")) : keep(town),
 
@@ -150,8 +150,8 @@ public interface TownEditor {
                 (town, org) -> town.contains("の次に番地がくる場合") ? empty : keep(town),
                 (town, org) -> endsWithExact(town, "一円" ,org.city) ? empty : keep(town),
                 (town, org) -> town.matches(".*（[０-９]+階）") ? extractParen(town) : keep(town),
-                (town, org) -> town.matches(".*第.*地割～第.*地割.*") ? Arrays.asList(town.replaceAll("第.*地割～第.*地割", "")) : keep(town),
-                (town, org) -> town.matches(".*地割～.*地割.*") ? Arrays.asList(town.replaceAll("[０-９]+地割～.*", "")) : keep(town),
+                (town, org) -> town.matches(".*第.*地割〜第.*地割.*") ? Arrays.asList(town.replaceAll("第.*地割〜第.*地割", "")) : keep(town),
+                (town, org) -> town.matches(".*地割〜.*地割.*") ? Arrays.asList(town.replaceAll("[０-９]+地割〜.*", "")) : keep(town),
                 (town, org) -> town.contains("地割、") ? Arrays.asList(town.split("、")) : keep(town),
                 (town, org) -> town.startsWith("甲、乙") ? Arrays.asList(town.split("、")) : keep(town),
                 (town, org) -> hasParen(town) ? removeParen(town) : keep(town)

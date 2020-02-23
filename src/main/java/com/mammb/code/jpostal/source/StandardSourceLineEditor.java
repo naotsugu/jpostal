@@ -16,6 +16,7 @@
 package com.mammb.code.jpostal.source;
 
 import com.mammb.code.jpostal.Address;
+import com.mammb.code.jpostal.MunicipalId;
 import com.mammb.code.jpostal.PostalCode;
 
 import java.util.ArrayList;
@@ -78,11 +79,13 @@ public class StandardSourceLineEditor implements SourceLine {
         List<Address> list = new ArrayList<>();
         for (String town : towns()) {
             if (town.contains("（") && town.contains("）")) {
-                list.add(Address.of(PostalCode.of(pear.code), pear.pref, pear.city,
+                list.add(Address.of(
+                        PostalCode.of(pear.code), MunicipalId.of(pear.mccd), pear.pref, pear.city,
                         town.substring(0, town.indexOf('（')),
                         town.substring(town.indexOf('（') + 1, town.indexOf('）'))));
             } else {
-                list.add(Address.of(PostalCode.of(pear.code), pear.pref, pear.city, town, ""));
+                list.add(Address.of(
+                        PostalCode.of(pear.code), MunicipalId.of(pear.mccd), pear.pref, pear.city, town, ""));
             }
         }
         return list;

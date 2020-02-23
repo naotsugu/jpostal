@@ -212,7 +212,7 @@ class StandardSourceLineEditorTest {
 
     @Test
     void getStandardAddress21() {
-        StandardSourceLine line = StandardSourceLine.of("12219,\"29001\",\"2900156\",\"ﾁﾊﾞｹﾝ\",\"ｲﾁﾊﾗｼ\",\"ｸｻｶﾘ(1656-1999)\",\"千葉県\",\"市原市\",\"草刈（１６５６～１９９９）\",1,0,0,0,0,0");
+        StandardSourceLine line = StandardSourceLine.of("12219,\"29001\",\"2900156\",\"ﾁﾊﾞｹﾝ\",\"ｲﾁﾊﾗｼ\",\"ｸｻｶﾘ(1656-1999)\",\"千葉県\",\"市原市\",\"草刈（１６５６〜１９９９）\",1,0,0,0,0,0");
         Address address = StandardSourceLineEditor.of(line, stdRules).getAddress().get(0);
         assertThat(address.getTown()).isEqualTo("草刈");
         assertThat(address.getStreet()).isEqualTo("");
@@ -220,7 +220,7 @@ class StandardSourceLineEditorTest {
 
     @Test
     void getStandardAddress22() {
-        StandardSourceLine line = StandardSourceLine.of("20202,\"39982\",\"3998251\",\"ﾅｶﾞﾉｹﾝ\",\"ﾏﾂﾓﾄｼ\",\"ｼﾏｳﾁ(9820､9821､9823-9830､9864ﾊﾞﾝﾁｲｼﾞｮｳ)\",\"長野県\",\"松本市\",\"島内（９８２０、９８２１、９８２３～９８３０、９８６４番地以上）\",1,0,0,0,0,0\n");
+        StandardSourceLine line = StandardSourceLine.of("20202,\"39982\",\"3998251\",\"ﾅｶﾞﾉｹﾝ\",\"ﾏﾂﾓﾄｼ\",\"ｼﾏｳﾁ(9820､9821､9823-9830､9864ﾊﾞﾝﾁｲｼﾞｮｳ)\",\"長野県\",\"松本市\",\"島内（９８２０、９８２１、９８２３〜９８３０、９８６４番地以上）\",1,0,0,0,0,0\n");
         Address address = StandardSourceLineEditor.of(line, stdRules).getAddress().get(0);
         assertThat(address.getTown()).isEqualTo("島内");
         assertThat(address.getStreet()).isEqualTo("９８２０");
@@ -293,7 +293,7 @@ class StandardSourceLineEditorTest {
 
     @Test
     void getStandardAddress27() {
-        StandardSourceLine line = StandardSourceLine.of("06365,\"99602\",\"9960301\",\"ﾔﾏｶﾞﾀｹﾝ\",\"ﾓｶﾞﾐｸﾞﾝｵｵｸﾗﾑﾗ\",\"ﾐﾅﾐﾔﾏ(430ﾊﾞﾝﾁｲｼﾞｮｳ<1770-1-2､1862-42､\",\"山形県\",\"最上郡大蔵村\",\"南山（４３０番地以上「１７７０－１～２、１８６２－４２、\",1,1,0,0,0,0")
+        StandardSourceLine line = StandardSourceLine.of("06365,\"99602\",\"9960301\",\"ﾔﾏｶﾞﾀｹﾝ\",\"ﾓｶﾞﾐｸﾞﾝｵｵｸﾗﾑﾗ\",\"ﾐﾅﾐﾔﾏ(430ﾊﾞﾝﾁｲｼﾞｮｳ<1770-1-2､1862-42､\",\"山形県\",\"最上郡大蔵村\",\"南山（４３０番地以上「１７７０－１〜２、１８６２－４２、\",1,1,0,0,0,0")
                            .marge(StandardSourceLine.of("06365,\"99602\",\"9960301\",\"ﾔﾏｶﾞﾀｹﾝ\",\"ﾓｶﾞﾐｸﾞﾝｵｵｸﾗﾑﾗ\",\"1923-5ｦﾉｿﾞｸ>､ｵｵﾔﾁ､ｵﾘﾜﾀﾘ､ｶﾝｶﾈﾉ､ｷﾝｻﾞﾝ､ﾀｷﾉｻﾜ､ﾄﾖﾏｷ､ﾇﾏﾉﾀﾞｲ､\",\"山形県\",\"最上郡大蔵村\",\"１９２３－５を除く」、大谷地、折渡、鍵金野、金山、滝ノ沢、豊牧、沼の台、\",1,1,0,0,0,0"))
                            .marge(StandardSourceLine.of("06365,\"99602\",\"9960301\",\"ﾔﾏｶﾞﾀｹﾝ\",\"ﾓｶﾞﾐｸﾞﾝｵｵｸﾗﾑﾗ\",\"ﾋｼﾞｵﾘ､ﾋﾗﾊﾞﾔｼ)\",\"山形県\",\"最上郡大蔵村\",\"肘折、平林）\",1,1,0,0,0,0"));
         Address address = StandardSourceLineEditor.of(line, stdRules).getAddress().get(0);
@@ -365,7 +365,7 @@ class StandardSourceLineEditorTest {
 
     @Test
     void getStandardAddress30() {
-        StandardSourceLine line = StandardSourceLine.of("03366,\"02955\",\"0295523\",\"ｲﾜﾃｹﾝ\",\"ﾜｶﾞｸﾞﾝﾆｼﾜｶﾞﾏﾁ\",\"ｴｯﾁｭｳﾊﾀ64ﾁﾜﾘ-ｴｯﾁｭｳﾊﾀ66ﾁﾜﾘ\",\"岩手県\",\"和賀郡西和賀町\",\"越中畑６４地割～越中畑６６地割\",0,0,0,1,0,0");
+        StandardSourceLine line = StandardSourceLine.of("03366,\"02955\",\"0295523\",\"ｲﾜﾃｹﾝ\",\"ﾜｶﾞｸﾞﾝﾆｼﾜｶﾞﾏﾁ\",\"ｴｯﾁｭｳﾊﾀ64ﾁﾜﾘ-ｴｯﾁｭｳﾊﾀ66ﾁﾜﾘ\",\"岩手県\",\"和賀郡西和賀町\",\"越中畑６４地割〜越中畑６６地割\",0,0,0,1,0,0");
         Address address = StandardSourceLineEditor.of(line, stdRules).getAddress().get(0);
         assertThat(address.getTown()).isEqualTo("越中畑");
         assertThat(address.getStreet()).isEqualTo("");
@@ -373,7 +373,7 @@ class StandardSourceLineEditorTest {
 
     @Test
     void getStandardAddress31() {
-        StandardSourceLine line = StandardSourceLine.of("03507,\"02879\",\"0287917\",\"ｲﾜﾃｹﾝ\",\"ｸﾉﾍｸﾞﾝﾋﾛﾉﾁｮｳ\",\"ﾀﾈｲﾁﾀﾞｲ50ﾁﾜﾘ-ﾀﾞｲ70ﾁﾜﾘ(ｵｵｻﾜ､ｼﾞｮｳﾅｲ､ﾀｷｻﾜ)\",\"岩手県\",\"九戸郡洋野町\",\"種市第５０地割～第７０地割（大沢、城内、滝沢）\",0,1,0,0,0,0");
+        StandardSourceLine line = StandardSourceLine.of("03507,\"02879\",\"0287917\",\"ｲﾜﾃｹﾝ\",\"ｸﾉﾍｸﾞﾝﾋﾛﾉﾁｮｳ\",\"ﾀﾈｲﾁﾀﾞｲ50ﾁﾜﾘ-ﾀﾞｲ70ﾁﾜﾘ(ｵｵｻﾜ､ｼﾞｮｳﾅｲ､ﾀｷｻﾜ)\",\"岩手県\",\"九戸郡洋野町\",\"種市第５０地割〜第７０地割（大沢、城内、滝沢）\",0,1,0,0,0,0");
         Address address = StandardSourceLineEditor.of(line, stdRules).getAddress().get(0);
         assertThat(address.getTown()).isEqualTo("種市");
         assertThat(address.getStreet()).isEqualTo("大沢");
@@ -387,6 +387,13 @@ class StandardSourceLineEditorTest {
         assertThat(address.getStreet()).isEqualTo("滝沢");
     }
 
+    @Test
+    void getStandardAddress32() {
+        StandardSourceLine line = StandardSourceLine.of("13103,\"108  \",\"1080023\",\"ﾄｳｷｮｳﾄ\",\"ﾐﾅﾄｸ\",\"ｼﾊﾞｳﾗ(2-4ﾁｮｳﾒ)\",\"東京都\",\"港区\",\"芝浦（２〜４丁目）\",1,0,1,0,0,0");
+        Address address = StandardSourceLineEditor.of(line, stdRules).getAddress().get(0);
+        assertThat(address.getTown()).isEqualTo("芝浦");
+        assertThat(address.getStreet()).isEqualTo("");
+    }
 
     @Test
     void getSimpleAddress01() {

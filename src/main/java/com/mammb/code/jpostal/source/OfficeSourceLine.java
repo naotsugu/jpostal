@@ -15,6 +15,7 @@
  */
 package com.mammb.code.jpostal.source;
 
+import com.mammb.code.jpostal.MunicipalId;
 import com.mammb.code.jpostal.PostalCode;
 import com.mammb.code.jpostal.Address;
 
@@ -46,6 +47,7 @@ import java.util.Objects;
  */
 public class OfficeSourceLine implements SourceLine {
 
+    private String mccd;
     private String code;
 
     private String pref;
@@ -64,7 +66,7 @@ public class OfficeSourceLine implements SourceLine {
         if (line.size() != 13) {
             throw new RuntimeException("Illegal format. [" + str + "]");
         }
-
+        mccd = Strings.strip(line.get(0), '"');
         code = Strings.strip(line.get(7), '"');
 
         pref = Strings.strip(line.get(3), '"');
@@ -86,13 +88,16 @@ public class OfficeSourceLine implements SourceLine {
 
     @Override
     public String toString() {
-        return String.join(",", code, pref, city, town, "");
+        return String.join(",", mccd, code, pref, city, town, "");
     }
 
 
     @Override
     public List<Address> getAddress() {
-        return Arrays.asList(Address.of(PostalCode.of(code), pref, city, town, street));
+        return Arrays.asList(Address.of(
+                PostalCode.of(code),
+                MunicipalId.of(mccd),
+                pref, city, town, street));
     }
 
 }

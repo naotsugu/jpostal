@@ -9,7 +9,6 @@
             position: relative;
             margin: 100px;
         }
-
         .typeahead, .tt-query, .tt-hint {
             border: 2px solid #CCCCCC;
             border-radius: 8px;
@@ -40,10 +39,16 @@
             margin-top: 12px;
             padding: 8px 0;
             width: 500px;
+            max-height: 300px;
+            overflow-y: auto;
         }
         .tt-suggestion {
             font-size: 18px;
             padding: 3px 10px;
+        }
+        .tt-cursor {
+            background-color: #0097CF;
+            color: #FFFFFF;
         }
         .tt-dataset {
             padding: 3px 10px;
@@ -63,7 +68,9 @@
 <div class="postal-check">
     <h2>Type postal code</h2>
     <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="1231234">
+    <h4 id="selected"></h4>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.0/typeahead.bundle.min.js"></script>
@@ -83,7 +90,7 @@
         highlight: true
     },
     {
-        limit: 20,
+        limit: 100,
         name: 'postal',
         display: function(item) { return item.code; },
         source: postal,
@@ -94,6 +101,9 @@
                 return '<div>' + data.code + ' <small>' + data.prefecture  + data.city + data.town + data.street + '</small></div>';
             }
         }
+    })
+    .on('typeahead:selected', function(event, selection) {
+        $('#selected').text(selection.code + ' ' + selection.prefecture  + selection.city + selection.town + selection.street);
     });
 </script>
 </body>

@@ -16,6 +16,7 @@
 package com.mammb.code.jpostal.source;
 
 import com.mammb.code.jpostal.Address;
+import com.mammb.code.jpostal.MunicipalId;
 import com.mammb.code.jpostal.PostalCode;
 
 import java.util.Arrays;
@@ -24,7 +25,6 @@ import java.util.Objects;
 
 /**
  * StandardSourceLine.
- * <p>
  * <pre>
  * 0. 全国地方公共団体コード
  * 1. 旧）郵便番号(5桁)
@@ -45,6 +45,7 @@ import java.util.Objects;
  */
 class StandardSourceLine implements SourceLine {
 
+    String mccd;
     String code;
 
     String pref;
@@ -66,7 +67,7 @@ class StandardSourceLine implements SourceLine {
         if (line.size() != 15) {
             throw new RuntimeException("Illegal format. [" + str + "]");
         }
-
+        mccd = line.get(0);
         code = Strings.strip(line.get(2), '"');
 
         pref = Strings.strip(line.get(6), '"');
@@ -109,7 +110,10 @@ class StandardSourceLine implements SourceLine {
 
     @Override
     public List<Address> getAddress() {
-        return Arrays.asList(Address.of(PostalCode.of(code), pref, city, town, ""));
+        return Arrays.asList(Address.of(
+                PostalCode.of(code),
+                MunicipalId.of(mccd),
+                pref, city, town, ""));
     }
 
 }

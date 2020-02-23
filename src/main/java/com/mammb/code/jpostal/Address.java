@@ -15,6 +15,7 @@
  */
 package com.mammb.code.jpostal;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -22,17 +23,19 @@ import java.util.Objects;
  *
  * @author naotsugu
  */
-public class Address {
+public class Address implements Serializable {
 
     private final PostalCode code;
+    private final MunicipalId municipalId;
     private final String prefecture;
     private final String city;
     private final String town;
     private final String street;
 
 
-    private Address(PostalCode code, String prefecture, String city, String town, String street) {
+    private Address(PostalCode code, MunicipalId municipalId, String prefecture, String city, String town, String street) {
         this.code = Objects.requireNonNull(code);
+        this.municipalId = Objects.requireNonNull(municipalId);
         this.prefecture = Objects.isNull(prefecture) ? "" : prefecture;
         this.city = Objects.isNull(city) ? "" : city;
         this.town = Objects.isNull(town) ? "" : town;
@@ -43,14 +46,15 @@ public class Address {
     /**
      * Create the {@code Address}.
      * @param code the postal code
+     * @param municipalId the MunicipalId
      * @param prefecture the prefecture name
      * @param city the city name
      * @param town the town name
      * @param street the street name
      * @return the {@code Address}
      */
-    public static Address of(PostalCode code, String prefecture, String city, String town, String street) {
-        return new Address(code, prefecture, city, town, street);
+    public static Address of(PostalCode code, MunicipalId municipalId, String prefecture, String city, String town, String street) {
+        return new Address(code, municipalId, prefecture, city, town, street);
     }
 
 
@@ -62,6 +66,13 @@ public class Address {
         return code;
     }
 
+    /**
+     * Get the municipalId.
+     * @return municipalId
+     */
+    public MunicipalId getMunicipalId() {
+        return municipalId;
+    }
 
     /**
      * Get the prefecture name.
@@ -105,6 +116,7 @@ public class Address {
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
         return code.equals(address.code) &&
+                municipalId.equals(address.municipalId) &&
                 prefecture.equals(address.prefecture) &&
                 city.equals(address.city) &&
                 town.equals(address.town) &&
@@ -114,7 +126,7 @@ public class Address {
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, prefecture, city, town, street);
+        return Objects.hash(code, municipalId, prefecture, city, town, street);
     }
 
 
@@ -122,6 +134,7 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "code=" + code +
+                ", municipalId='" + municipalId + '\'' +
                 ", prefecture='" + prefecture + '\'' +
                 ", city='" + city + '\'' +
                 ", town='" + town + '\'' +
@@ -136,8 +149,8 @@ public class Address {
      */
     public String toJsonString() {
         return String.format(
-                "{'code': '%s', 'prefecture': '%s', 'city': '%s', 'town': '%s', 'street': '%s'}".replace("'", "\""),
-                code.getCode(), prefecture, city, town, street);
+                "{'code': '%s', 'prefectureCode': '%s', 'municipalityCode': '%s', 'prefecture': '%s', 'city': '%s', 'town': '%s', 'street': '%s'}".replace("'", "\""),
+                code.getCode(), municipalId.getPrefCode(), municipalId.getMunicipalCode(), prefecture, city, town, street);
     }
 
 }
