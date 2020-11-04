@@ -2,6 +2,8 @@
 
 Japan postal code dictionary(so‐called ken_all.csv) utility.
 
+* Read this in other languages: [日本語](README.ja.md)
+
 ![jpostal](doc/images/search.gif)
 
 <br/>
