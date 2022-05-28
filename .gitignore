@@ -70,7 +70,6 @@ out/
 .vscode/
 
 
-*.jar
 *.war
 *.nar
 *.ear

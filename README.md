@@ -1,3 +1,5 @@
+[![Build](https://github.com/naotsugu/jpostal/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/naotsugu/jpostal/actions/workflows/gradle-build.yml)
+
 # JPostal
 
 Japan postal code dictionary(so‐called ken_all.csv) utility.

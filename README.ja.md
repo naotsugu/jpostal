@@ -1,3 +1,6 @@
+[![Build](https://github.com/naotsugu/jpostal/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/naotsugu/jpostal/actions/workflows/gradle-build.yml)
+
+
 # JPostal
 
 郵便番号辞書(いわゆる ken_all.csv)のユーティリティです.
