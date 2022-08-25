@@ -16,7 +16,6 @@
 package com.mammb.code.jpostal.source;
 
 import com.mammb.code.jpostal.Address;
-
 import java.util.List;
 
 /**

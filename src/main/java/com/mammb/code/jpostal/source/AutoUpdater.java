@@ -61,7 +61,7 @@ public class AutoUpdater {
     public void schedule() {
         LocalDate date = LocalDate.now().withDayOfMonth(1).plusMonths(1L);
         LocalDateTime dt = date.atStartOfDay().plusMinutes(new Random().nextInt(60));
-        log.info("next update scheduled - " + dt.toString());
+        log.info("next update scheduled - " + dt);
         executor.schedule(
                 postal::initializeAll,
                 ChronoUnit.SECONDS.between(LocalDateTime.now(), dt),

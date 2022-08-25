@@ -38,7 +38,7 @@ public class PostalSourceFetcher {
 
     private final Path baseDir;
     private final boolean recycle;
-    private String sourceUrl;
+    private final String sourceUrl;
 
 
     private PostalSourceFetcher(Path baseDir, String sourceUrl, boolean recycle) {

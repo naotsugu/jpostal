@@ -21,7 +21,6 @@ import com.mammb.code.jpostal.source.PostalSourceFetcher;
 import com.mammb.code.jpostal.source.PostalSourceReader;
 import com.mammb.code.jpostal.source.Settings;
 import com.mammb.code.jpostal.source.SourceLine;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
