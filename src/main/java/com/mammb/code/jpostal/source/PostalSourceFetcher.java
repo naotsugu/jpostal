@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2016 the original author or authors.
+ * Copyright 2002-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,9 +103,9 @@ public class PostalSourceFetcher {
             Path tempDir = Files.createTempDirectory(PostalSource.class.getSimpleName() + ".");
             unzip(zipPath, tempDir, StandardCharsets.UTF_8);
             return Files.list(tempDir)
-                    .filter(p -> p.getFileName().toString().toLowerCase().endsWith(".csv"))
-                    .findFirst()
-                    .orElseThrow();
+                .filter(p -> p.getFileName().toString().toLowerCase().endsWith(".csv"))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("file not found."));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -142,7 +142,7 @@ public class PostalSourceFetcher {
             final ZipInputStream zipInputStream,
             final Path unzipFilePath) throws IOException {
         try (BufferedOutputStream bos = new BufferedOutputStream(
-                new FileOutputStream(unzipFilePath.toAbsolutePath().toString()))) {
+                Files.newOutputStream(Paths.get(unzipFilePath.toAbsolutePath().toString())))) {
             byte[] bytesIn = new byte[1024 * 5];
             int read;
             while ((read = zipInputStream.read(bytesIn)) != -1) {

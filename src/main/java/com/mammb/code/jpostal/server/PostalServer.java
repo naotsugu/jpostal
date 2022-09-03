@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2016 the original author or authors.
+ * Copyright 2002-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,9 @@ package com.mammb.code.jpostal.server;
 
 import com.mammb.code.jpostal.Postal;
 import com.sun.net.httpserver.HttpServer;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * PostalServer.
@@ -30,7 +28,7 @@ import java.util.logging.Logger;
  */
 public class PostalServer {
 
-    private static final Logger log = Logger.getLogger(PostalServer.class.getName());
+    private static final System.Logger log = System.getLogger(PostalServer.class.getName());
 
     private final HttpServer server;
 

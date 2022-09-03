@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2016 the original author or authors.
+ * Copyright 2002-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,17 @@ import java.util.Objects;
  */
 public class Address implements Serializable {
 
+    /** PostalCode. */
     private final PostalCode code;
+    /** MunicipalId. */
     private final MunicipalId municipalId;
+    /** prefecture. */
     private final String prefecture;
+    /** city. */
     private final String city;
+    /** town. */
     private final String town;
+    /** street. */
     private final String street;
 
 

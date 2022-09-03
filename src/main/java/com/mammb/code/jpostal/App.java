@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2016 the original author or authors.
+ * Copyright 2002-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 package com.mammb.code.jpostal;
 
 import com.mammb.code.jpostal.server.PostalServer;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.lang.System.Logger.Level.*;
 
 /**
  * Application entry point.
@@ -27,7 +25,7 @@ import java.util.logging.Logger;
  */
 public class App {
 
-    private static final Logger log = Logger.getLogger(App.class.getName());
+    private static final System.Logger log = System.getLogger(App.class.getName());
 
     /**
      * Start tha App.
@@ -42,13 +40,13 @@ public class App {
                 .officeSourceSupport(false)
                 .autoUpdateSupport(true);
 
-        log.log(Level.INFO, "initializing...");
+        log.log(INFO, "initializing...");
 
         postal.initialize();
 
-        log.log(Level.INFO, "initialized");
+        log.log(INFO, "initialized");
 
-        log.log(Level.INFO, "start server..");
+        log.log(INFO, "start server..");
         PostalServer server = PostalServer.of(postal);
         server.start();
 

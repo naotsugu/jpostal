@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2016 the original author or authors.
+ * Copyright 2002-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +19,16 @@ import com.mammb.code.jpostal.Address;
 import com.mammb.code.jpostal.Postal;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.lang.System.Logger.Level.*;
 
 /**
  * Handler of http request.
@@ -38,7 +37,7 @@ import java.util.regex.Pattern;
  */
 class PostalHandler implements HttpHandler {
 
-    private static final Logger log = Logger.getLogger(PostalHandler.class.getName());
+    private static final System.Logger log = System.getLogger(PostalHandler.class.getName());
 
     private final String contextRoot;
     private final Postal postal;
@@ -82,7 +81,7 @@ class PostalHandler implements HttpHandler {
             writeResponse(200, sb.toString(), exchange);
 
         } catch (Exception e) {
-            log.log(Level.SEVERE, e.getMessage(), e);
+            log.log(ERROR, e.getMessage(), e);
             writeResponse(500, "Server Error.", exchange);
         }
     }
@@ -91,8 +90,7 @@ class PostalHandler implements HttpHandler {
     private void writeResponse(int rCode, String res, HttpExchange exchange) {
         byte[] bytes = res.getBytes(StandardCharsets.UTF_8);
         try (OutputStream os = exchange.getResponseBody()) {
-            exchange.getResponseHeaders().set("Content-Type", "application/json; charset="
-                    + StandardCharsets.UTF_8.toString());
+            exchange.getResponseHeaders().set("Content-Type", "application/json; charset=" + StandardCharsets.UTF_8);
             exchange.sendResponseHeaders(rCode, bytes.length);
             os.write(bytes);
         } catch (IOException e) {

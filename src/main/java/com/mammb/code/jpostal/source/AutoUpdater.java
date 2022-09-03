@@ -16,7 +16,6 @@
 package com.mammb.code.jpostal.source;
 
 import com.mammb.code.jpostal.Postal;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -24,7 +23,8 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
+
+import static java.lang.System.Logger.Level.*;
 
 /**
  * Postal auto updater.
@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  */
 public class AutoUpdater {
 
-    private static final Logger log = Logger.getLogger(AutoUpdater.class.getName());
+    private static final System.Logger log = System.getLogger(AutoUpdater.class.getName());
 
     private final ScheduledExecutorService executor;
     private final Postal postal;
@@ -61,7 +61,7 @@ public class AutoUpdater {
     public void schedule() {
         LocalDate date = LocalDate.now().withDayOfMonth(1).plusMonths(1L);
         LocalDateTime dt = date.atStartOfDay().plusMinutes(new Random().nextInt(60));
-        log.info("next update scheduled - " + dt);
+        log.log(INFO, "next update scheduled - " + dt);
         executor.schedule(
                 postal::initializeAll,
                 ChronoUnit.SECONDS.between(LocalDateTime.now(), dt),

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2016 the original author or authors.
+ * Copyright 2002-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,10 @@ public abstract class PostalSourceReader implements Closeable {
 
     private final BufferedReader bufferedReader;
 
+    /**
+     * Constructor.
+     * @param path path of file
+     */
     protected PostalSourceReader(Path path) {
         Objects.requireNonNull(path);
         try {
@@ -49,6 +53,10 @@ public abstract class PostalSourceReader implements Closeable {
      */
     public abstract SourceLine readNext();
 
+    /**
+     * Read line.
+     * @return the line of string
+     */
     protected String readLine() {
         try {
             return bufferedReader.readLine();

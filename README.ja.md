@@ -66,7 +66,7 @@ $ java -jar build/libs/jpostal.jar
 または、`PostalServer` を使います. 
 
 
-```
+```java
 PostalServer server = PostalServer.of(postal);
 server.start();
 ```
@@ -91,13 +91,13 @@ Postal postal = Postal.of()
 ```
 
 
-| Option                 | Default |
-| ---------------------- | ------- |
-| `fineAddressSupport`   | `true`  |
-| `leftMatchSupport`     | `true`  |
-| `leftMatchLimitCount`  |  `20`   |
-| `officeSourceSupport`  | `false` |
-| `autoUpdateSupport`    | `false` |
+| Option                 | Default | Description                 |
+| ---------------------- | ------- |-----------------------------|
+| `fineAddressSupport`   | `true`  | 詳細な住所加工を行うかどうかを指定します        |
+| `leftMatchSupport`     | `true`  | 住所の前方一致検索を有効にします            |
+| `leftMatchLimitCount`  |  `20`   | 前方一致検索時の検索結果数を指定します         |
+| `officeSourceSupport`  | `false` | 事業所の個別郵便番号をサポートするかどうかを指定します |
+| `autoUpdateSupport`    | `false` | 郵便番号辞書の自動更新を有効にするかどうかを指定します |
 
 <br/>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2016 the original author or authors.
+ * Copyright 2002-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +31,7 @@ import java.util.stream.Collectors;
  */
 public class StandardSourceLineEditor implements SourceLine {
 
-    private static final Logger log = Logger.getLogger(StandardSourceLineEditor.class.getName());
+    private static final System.Logger log = System.getLogger(StandardSourceLineEditor.class.getName());
 
     private final StandardSourceLine pear;
     private final List<TownEditor> rules;
@@ -44,6 +43,12 @@ public class StandardSourceLineEditor implements SourceLine {
     }
 
 
+    /**
+     * Create a {@link StandardSourceLineEditor}.
+     * @param origin the SourceLine
+     * @param rules the rules
+     * @return a {@link StandardSourceLineEditor}
+     */
     public static StandardSourceLineEditor of(StandardSourceLine origin, List<TownEditor> rules) {
         return new StandardSourceLineEditor(origin, rules);
     }

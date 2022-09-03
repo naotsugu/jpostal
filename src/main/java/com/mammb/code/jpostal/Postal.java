@@ -19,7 +19,6 @@ import com.mammb.code.jpostal.source.AutoUpdater;
 import com.mammb.code.jpostal.source.PostalSource;
 import com.mammb.code.jpostal.source.PostalSourceFetcher;
 import com.mammb.code.jpostal.source.PostalSourceReader;
-import com.mammb.code.jpostal.source.Settings;
 import com.mammb.code.jpostal.source.SourceLine;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -36,8 +35,8 @@ import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import static java.lang.System.Logger.Level.*;
 
 /**
  * Postal.
@@ -46,7 +45,7 @@ import java.util.logging.Logger;
  */
 public class Postal {
 
-    private static final Logger log = Logger.getLogger(Postal.class.getName());
+    private static final System.Logger log = System.getLogger(Postal.class.getName());
 
     private final Map<PostalCode, Collection<Address>> map;
     private final NavigableSet<String> index;
@@ -243,7 +242,7 @@ public class Postal {
             for (;;) {
                 SourceLine line = reader.readNext();
                 if (Objects.isNull(line)) {
-                    log.log(Level.INFO, "imported " + source + ". [" + map.size() + "]");
+                    log.log(INFO, "imported " + source + ". [" + map.size() + "]");
                     break;
                 }
                 line.getAddress().forEach(this::put);
