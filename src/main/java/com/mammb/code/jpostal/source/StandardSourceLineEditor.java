@@ -19,7 +19,7 @@ import com.mammb.code.jpostal.Address;
 import com.mammb.code.jpostal.MunicipalId;
 import com.mammb.code.jpostal.PostalCode;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +55,7 @@ public class StandardSourceLineEditor implements SourceLine {
 
 
     private List<String> towns() {
-        return towns(rules.iterator(), Arrays.asList(pear.town));
+        return towns(rules.iterator(), Collections.singletonList(pear.town));
     }
 
 

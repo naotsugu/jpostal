@@ -109,10 +109,10 @@ class StandardSourceLine implements SourceLine {
 
     @Override
     public List<Address> getAddress() {
-        return Arrays.asList(Address.of(
-                PostalCode.of(code),
-                MunicipalId.of(mccd),
-                pref, city, town, ""));
+        return List.of(Address.of(
+            PostalCode.of(code),
+            MunicipalId.of(mccd),
+            pref, city, town, ""));
     }
 
 }

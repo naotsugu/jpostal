@@ -93,10 +93,10 @@ public class OfficeSourceLine implements SourceLine {
 
     @Override
     public List<Address> getAddress() {
-        return Arrays.asList(Address.of(
-                PostalCode.of(code),
-                MunicipalId.of(mccd),
-                pref, city, town, street));
+        return List.of(Address.of(
+            PostalCode.of(code),
+            MunicipalId.of(mccd),
+            pref, city, town, street));
     }
 
 }

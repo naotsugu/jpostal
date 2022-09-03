@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.mammb'
-version = '0.2.0'
+version = '0.3.0'
 
 repositories {
     mavenCentral()
@@ -37,7 +37,7 @@ jar {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(9)
+        languageVersion = JavaLanguageVersion.of(11)
     }
     withJavadocJar()
     withSourcesJar()

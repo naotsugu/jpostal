@@ -55,7 +55,7 @@ public interface PostalSource {
 
         return new PostalSource() {
 
-            private List<TownEditor> editors = new ArrayList<>();
+            private final List<TownEditor> editors = new ArrayList<>();
 
             @Override
             public String url() {

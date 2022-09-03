@@ -105,7 +105,7 @@ public class PostalSourceFetcher {
             return Files.list(tempDir)
                 .filter(p -> p.getFileName().toString().toLowerCase().endsWith(".csv"))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("file not found."));
+                .orElseThrow();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

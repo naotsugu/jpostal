@@ -17,6 +17,7 @@ package com.mammb.code.jpostal.source;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -130,9 +131,9 @@ public interface TownEditor {
             (town, org) -> town.matches(".*（.*〜.*）.*") ? removeParen(town) : keep(town),
 
             // 29 records 岩手県 地割
-            (town, org) -> town.matches(".*第.*地割〜第.*地割.*") ? Arrays.asList(town.replaceAll("第.*地割〜第.*地割", "")) : keep(town),
+            (town, org) -> town.matches(".*第.*地割〜第.*地割.*") ? List.of(town.replaceAll("第.*地割〜第.*地割", "")) : keep(town),
             //  9 records 岩手県 地割
-            (town, org) -> town.matches(".*地割〜.*地割.*") ? Arrays.asList(town.replaceAll("[０-９]+地割〜.*", "")) : keep(town),
+            (town, org) -> town.matches(".*地割〜.*地割.*") ? List.of(town.replaceAll("[０-９]+地割〜.*", "")) : keep(town),
             // 10 records 岩手県 地割
             (town, org) -> town.contains("地割、") ? Arrays.asList(town.split("、")) : keep(town),
 
@@ -151,8 +152,8 @@ public interface TownEditor {
                 (town, org) -> town.contains("の次に番地がくる場合") ? empty : keep(town),
                 (town, org) -> endsWithExact(town, "一円" ,org.city) ? empty : keep(town),
                 (town, org) -> town.matches(".*（[０-９]+階）") ? extractParen(town) : keep(town),
-                (town, org) -> town.matches(".*第.*地割〜第.*地割.*") ? Arrays.asList(town.replaceAll("第.*地割〜第.*地割", "")) : keep(town),
-                (town, org) -> town.matches(".*地割〜.*地割.*") ? Arrays.asList(town.replaceAll("[０-９]+地割〜.*", "")) : keep(town),
+                (town, org) -> town.matches(".*第.*地割〜第.*地割.*") ? List.of(town.replaceAll("第.*地割〜第.*地割", "")) : keep(town),
+                (town, org) -> town.matches(".*地割〜.*地割.*") ? List.of(town.replaceAll("[０-９]+地割〜.*", "")) : keep(town),
                 (town, org) -> town.contains("地割、") ? Arrays.asList(town.split("、")) : keep(town),
                 (town, org) -> town.startsWith("甲、乙") ? Arrays.asList(town.split("、")) : keep(town),
                 (town, org) -> hasParen(town) ? removeParen(town) : keep(town)
@@ -161,19 +162,19 @@ public interface TownEditor {
 
 
     private static List<String> keep(String input) {
-        return Arrays.asList(input);
+        return Collections.singletonList(input);
     }
 
 
     private static List<String> split(String input) {
 
         if (!hasParen(input)) {
-            return Arrays.asList(input);
+            return List.of(input);
         }
 
         String content = input.substring(input.indexOf('（'));
         if (!content.contains("、")) {
-            return Arrays.asList(input);
+            return List.of(input);
         }
 
         List<String> list = new ArrayList<>();
@@ -202,22 +203,22 @@ public interface TownEditor {
 
 
     private static List<String> extractParen(String input) {
-        return Arrays.asList(input.replace("（", "").replace("）", ""));
+        return List.of(input.replace("（", "").replace("）", ""));
     }
 
 
     private static List<String> removeSqBrackets(String input) {
-        return Arrays.asList(input.replaceFirst("「.*」", ""));
+        return List.of(input.replaceFirst("「.*」", ""));
     }
 
 
     private static List<String> removeParen(String input) {
-        return Arrays.asList(input.substring(0, input.lastIndexOf("（")));
+        return List.of(input.substring(0, input.lastIndexOf("（")));
     }
 
 
     private static List<String> remove(String input, String str) {
-        return Arrays.asList(input.replace(str, ""));
+        return List.of(input.replace(str, ""));
     }
 
 
