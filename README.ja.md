@@ -25,7 +25,7 @@
 
 ```groovy
 dependencies {
-    implementation 'com.mammb:jpostal:0.2.0'
+    implementation 'com.mammb:jpostal:0.3.0'
 }
 ```
 
