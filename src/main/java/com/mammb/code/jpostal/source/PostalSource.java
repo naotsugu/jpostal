@@ -15,6 +15,8 @@
  */
 package com.mammb.code.jpostal.source;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,34 @@ public interface PostalSource {
 
             @Override
             public PostalSourceReader reader(Path path) {
-                return StandardSourceLineReader.of(path, editors);
+                return StandardSourceLineReader.of(path, Charset.forName("Shift_JIS"), editors);
+            }
+
+            @Override
+            public void with(List<TownEditor> editors) {
+                this.editors.addAll(editors);
+            }
+        };
+    }
+
+    /**
+     * Get the standard utf source.
+     * @return standard source
+     */
+    static PostalSource standardUtfSource() {
+
+        return new PostalSource() {
+
+            private final List<TownEditor> editors = new ArrayList<>();
+
+            @Override
+            public String url() {
+                return "https://www.post.japanpost.jp/zipcode/utf_all.csv";
+            }
+
+            @Override
+            public PostalSourceReader reader(Path path) {
+                return StandardSourceLineReader.of(path, StandardCharsets.UTF_8, editors);
             }
 
             @Override
@@ -89,7 +118,7 @@ public interface PostalSource {
 
             @Override
             public PostalSourceReader reader(Path path) {
-                return OfficeSourceLineReader.of(path);
+                return OfficeSourceLineReader.of(path, Charset.forName("Shift_JIS"));
             }
 
             @Override

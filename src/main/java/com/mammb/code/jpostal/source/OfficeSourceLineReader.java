@@ -15,7 +15,9 @@
  */
 package com.mammb.code.jpostal.source;
 
+import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * Reader of {@code OfficeSourceLine}.
@@ -24,18 +26,19 @@ import java.nio.file.Path;
  */
 public class OfficeSourceLineReader extends PostalSourceReader {
 
-    private OfficeSourceLineReader(Path path) {
-        super(path);
+    private OfficeSourceLineReader(Path path, Charset charset) {
+        super(Objects.requireNonNull(path), Objects.requireNonNull(charset));
     }
 
 
     /**
      * Create the {@code OfficeSourceLineReader} instance.
      * @param path the source path
+     * @param charset the charset of source
      * @return {@code OfficeSourceLineReader} instance
      */
-    public static OfficeSourceLineReader of(Path path) {
-        return new OfficeSourceLineReader(path);
+    public static OfficeSourceLineReader of(Path path, Charset charset) {
+        return new OfficeSourceLineReader(path, charset);
     }
 
 

@@ -15,6 +15,7 @@
  */
 package com.mammb.code.jpostal.source;
 
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
@@ -30,8 +31,8 @@ public class StandardSourceLineReader extends PostalSourceReader {
     private final List<TownEditor> editors;
 
 
-    private StandardSourceLineReader(Path path, List<TownEditor> editors) {
-        super(Objects.requireNonNull(path));
+    private StandardSourceLineReader(Path path, Charset charset, List<TownEditor> editors) {
+        super(Objects.requireNonNull(path), Objects.requireNonNull(charset));
         this.buffered = null;
         this.editors = (Objects.isNull(editors) || editors.isEmpty())
                 ? TownEditor.standardEditors() : editors;
@@ -40,21 +41,23 @@ public class StandardSourceLineReader extends PostalSourceReader {
     /**
      * Create the {@code StandardSourceLineReader} instance.
      * @param path the source path
+     * @param charset the charset of source
      * @param editors the list of {@code TownEditor}
      * @return the {@code StandardSourceLineReader} instance
      */
-    public static StandardSourceLineReader of(Path path, List<TownEditor> editors) {
-        return new StandardSourceLineReader(path, editors);
+    public static StandardSourceLineReader of(Path path, Charset charset, List<TownEditor> editors) {
+        return new StandardSourceLineReader(path, charset, editors);
     }
 
 
     /**
      * Create the {@code StandardSourceLineReader} instance.
      * @param path the source path
+     * @param charset the charset of source
      * @return the {@code StandardSourceLineReader} instance
      */
-    public static StandardSourceLineReader of(Path path) {
-        return new StandardSourceLineReader(path, null);
+    public static StandardSourceLineReader of(Path path, Charset charset) {
+        return new StandardSourceLineReader(path, charset, null);
     }
 
 
