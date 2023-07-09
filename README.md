@@ -26,7 +26,7 @@ Add dependencies
 
 ```groovy
 dependencies {
-    implementation 'com.mammb:jpostal:0.3.0'
+    implementation 'com.mammb:jpostal:0.4.0'
 }
 ```
 
@@ -83,6 +83,7 @@ In addition, console page is `http://localhost:8080/postal/console.html`.
 
 ```java
 Postal postal = Postal.of()
+    .useLegacySource(false)
     .fineAddressSupport(true)
     .leftMatchSupport(true)
     .leftMatchLimitCount(15)
@@ -92,10 +93,11 @@ Postal postal = Postal.of()
 
 
 | Option                 | Default |
-| ---------------------- | ------- |
+| ---------------------- |---------|
+| `useLegacySource`   | `false` |
 | `fineAddressSupport`   | `true`  |
 | `leftMatchSupport`     | `true`  |
-| `leftMatchLimitCount`  |  `20`   |
+| `leftMatchLimitCount`  | `20`    |
 | `officeSourceSupport`  | `false` |
 | `autoUpdateSupport`    | `false` |
 
