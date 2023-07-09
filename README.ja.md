@@ -12,6 +12,10 @@
 ## Feature
 
 * japanpost.jp から辞書 csv を自動ダウンロード
+* 辞書データは以下を選択可能
+  * 「住所の郵便番号（1レコード1行、UTF-8形式）（CSV形式）」(`utf_all.csv`)
+  * 「読み仮名データの促音・拗音を小書きで表記するもの」(`ken_all.zip`)
+  * 「事業所の個別郵便番号」(`jigyosyo.zip`)
 * 住所情報の整形
 * 辞書の自動アップデート(月次)
 * REST web サーバ付属 
@@ -83,6 +87,7 @@ server.start();
 
 ```java
 Postal postal = Postal.of()
+    .useLegacySource(false)
     .fineAddressSupport(true)
     .leftMatchSupport(true)
     .leftMatchLimitCount(20)
@@ -91,13 +96,14 @@ Postal postal = Postal.of()
 ```
 
 
-| Option                 | Default | Description                 |
-| ---------------------- | ------- |-----------------------------|
-| `fineAddressSupport`   | `true`  | 詳細な住所加工を行うかどうかを指定します        |
-| `leftMatchSupport`     | `true`  | 住所の前方一致検索を有効にします            |
-| `leftMatchLimitCount`  |  `20`   | 前方一致検索時の検索結果数を指定します         |
-| `officeSourceSupport`  | `false` | 事業所の個別郵便番号をサポートするかどうかを指定します |
-| `autoUpdateSupport`    | `false` | 郵便番号辞書の自動更新を有効にするかどうかを指定します |
+| Option                 | Default | Description                                                                                         |
+| ---------------------- |---------|-----------------------------------------------------------------------------------------------------|
+| `useLegacySource`   | `false` | 2023年6月から提供開始された、1レコード1行、UTF-8形式ファイルを使用するか、旧来形式ファイルを使用するかを指定します。`true` とした場合、旧来形式のファイルをソースとして使用します。 |
+| `fineAddressSupport`   | `true`  | 詳細な住所加工を行うかどうかを指定します                                                                                |
+| `leftMatchSupport`     | `true`  | 住所の前方一致検索を有効にします                                                                                    |
+| `leftMatchLimitCount`  | `20`    | 前方一致検索時の検索結果数を指定します                                                                                 |
+| `officeSourceSupport`  | `false` | 事業所の個別郵便番号をサポートするかどうかを指定します                                                                         |
+| `autoUpdateSupport`    | `false` | 郵便番号辞書の自動更新を有効にするかどうかを指定します                                                                         |
 
 <br/>
 
@@ -105,12 +111,14 @@ Postal postal = Postal.of()
 
 ### 辞書のダウンロード
 
-`jpostal.jar` 実行時のディレクトリに `ken_all.zip` が存在する場合は、このファイルを利用します。
+`jpostal.jar` 実行時のディレクトリに `ken_all.zip` または `utf_all.csv` が存在する場合は、このファイルを利用します。
 
 ファイルが存在しない場合は、日本郵政の辞書ファイルを自動でダウンロードします.
 ダウンロードしたファイルは `jpostal.jar` 実行時のディレクトリにダウンロードされるため、次回起動時にはこのファイルを使うようになります.
 
-ダウンロードするファイルは「読み仮名データの促音・拗音を小書きで表記するもの」の全国版です.
+ダウンロードするファイルは「住所の郵便番号（1レコード1行、UTF-8形式）（CSV形式）」です。
+`useLegacySource` に `true` を指定した場合には「読み仮名データの促音・拗音を小書きで表記するもの」の全国版を使用します.
+
 オプションで `officeSourceSupport` が有効化されていた場合は「事業所の個別郵便番号」`jigyosyo.zip` を加えて扱います.
 
 
@@ -133,7 +141,8 @@ Postal postal = Postal.of()
 
 日本郵政の公開する郵便番号辞書はシステムでそのまま利用できる代物ではないため、各種の整形処理を行っています.
 
-複数行に分割されたレコードを合成した後、`com.mammb.code.jpostal.source.TownEditor` にある変換処理を行います.
+複数行に分割されたレコードを合成した後、![`com.mammb.code.jpostal.source.TownEditor`](src/main/java/com/mammb/code/jpostal/source/TownEditor.java) にある変換処理を行います.
+
 
 例えば以下のようなレコードは、
 

@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mammb.code.jpostal;
-
-import com.mammb.code.jpostal.source.PostalSource;
-import com.mammb.code.jpostal.source.TownEditor;
+package com.mammb.code.jpostal.source;
 
 /**
  * Settings.
@@ -25,32 +22,12 @@ import com.mammb.code.jpostal.source.TownEditor;
  */
 public class Settings {
 
-    private final PostalSource standardSource;
-    private final PostalSource officeSource;
-
-    private boolean leftMatchSupport;
-    private boolean officeSourceSupport;
-    private boolean autoUpdateSupport;
-    private boolean fineAddressSupport;
-    private int leftMatchLimitCount;
-
-
-    private Settings(
-            PostalSource standardSource,
-            PostalSource officeSource,
-            boolean fineAddressSupport,
-            boolean leftMatchSupport,
-            boolean officeSourceSupport,
-            boolean autoUpdateSupport,
-            int leftMatchLimitCount) {
-        this.standardSource = standardSource;
-        this.officeSource = officeSource;
-        this.fineAddressSupport = fineAddressSupport;
-        this.leftMatchSupport = leftMatchSupport;
-        this.officeSourceSupport = officeSourceSupport;
-        this.autoUpdateSupport = autoUpdateSupport;
-        this.leftMatchLimitCount = leftMatchLimitCount;
-    }
+    private boolean leftMatchSupport = true;
+    private boolean officeSourceSupport = false;
+    private boolean autoUpdateSupport = false;
+    private boolean fineAddressSupport = true;
+    private int leftMatchLimitCount = 20;
+    private boolean useLegacySource = false;
 
 
     /**
@@ -58,16 +35,16 @@ public class Settings {
      * @return {@code Settings} instance
      */
     public static Settings of() {
-        return new Settings(
-                PostalSource.standardSource(),
-                PostalSource.officeSource(),
-                true,
-                true,
-                false,
-                false,
-                20);
+        return new Settings();
     }
 
+    /**
+     * Set the useLegacySource.
+     * @param legacy useLegacySource
+     */
+    public void useLegacySource(boolean legacy) {
+        useLegacySource = legacy;
+    }
 
     /**
      * Set the leftMatchSupport.
@@ -114,12 +91,13 @@ public class Settings {
      * @return standardSource
      */
     public PostalSource standardSource() {
-        if (fineAddressSupport) {
-            standardSource.with(TownEditor.standardEditors());
-        } else {
-            standardSource.with(TownEditor.simpleEditors());
-        }
-        return standardSource;
+        PostalSource postalSource = useLegacySource
+            ? PostalSource.standardSource()
+            : PostalSource.standardUtfSource();
+        postalSource.with(fineAddressSupport
+            ? TownEditor.standardEditors()
+            : TownEditor.simpleEditors());
+        return postalSource;
     }
 
     /**
@@ -127,7 +105,7 @@ public class Settings {
      * @return officeSource
      */
     public PostalSource officeSource() {
-        return officeSourceSupport ? officeSource : null;
+        return officeSourceSupport ? PostalSource.officeSource() : null;
     }
 
     /**
@@ -153,4 +131,5 @@ public class Settings {
     public int leftMatchLimitCount() {
         return leftMatchLimitCount;
     }
+
 }

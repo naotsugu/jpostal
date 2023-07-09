@@ -73,11 +73,11 @@ public class PostalSourceFetcher {
      * @return the path of fetched file
      */
     public Path fetch() {
-        Path zipPath = baseDir.resolve(fetchedPath(sourceUrl));
-        if (!(recycle && Files.exists(zipPath))) {
-            zipPath = fetch(sourceUrl, zipPath);
+        Path path = baseDir.resolve(fetchedPath(sourceUrl));
+        if (!(recycle && Files.exists(path))) {
+            path = fetch(sourceUrl, path);
         }
-        return unzip(zipPath);
+        return path.endsWith(".zip") ? unzip(path) : path;
     }
 
 

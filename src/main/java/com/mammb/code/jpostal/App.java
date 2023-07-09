@@ -25,6 +25,7 @@ import static java.lang.System.Logger.Level.*;
  */
 public class App {
 
+    /** The logger. */
     private static final System.Logger log = System.getLogger(App.class.getName());
 
     /**
@@ -34,11 +35,12 @@ public class App {
     public static void main(String[] args) {
 
         Postal postal = Postal.of()
-                .fineAddressSupport(true)
-                .leftMatchSupport(true)
-                .leftMatchLimitCount(20)
-                .officeSourceSupport(false)
-                .autoUpdateSupport(true);
+            .useLegacySource(false)
+            .fineAddressSupport(true)
+            .leftMatchSupport(true)
+            .leftMatchLimitCount(20)
+            .officeSourceSupport(false)
+            .autoUpdateSupport(true);
 
         log.log(INFO, "initializing...");
 
@@ -49,6 +51,8 @@ public class App {
         log.log(INFO, "start server..");
         PostalServer server = PostalServer.of(postal);
         server.start();
+
+        log.log(INFO, "http://localhost:8080/postal/console.html");
 
     }
 

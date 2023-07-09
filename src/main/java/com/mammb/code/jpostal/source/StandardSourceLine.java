@@ -18,7 +18,6 @@ package com.mammb.code.jpostal.source;
 import com.mammb.code.jpostal.Address;
 import com.mammb.code.jpostal.MunicipalId;
 import com.mammb.code.jpostal.PostalCode;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

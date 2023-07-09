@@ -15,6 +15,7 @@
  */
 package com.mammb.code.jpostal.source;
 
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +32,7 @@ public class StandardSourceLineReader extends PostalSourceReader {
 
 
     private StandardSourceLineReader(Path path, List<TownEditor> editors) {
-        super(Objects.requireNonNull(path));
+        super(Objects.requireNonNull(path), Charset.forName("Shift_JIS"));
         this.buffered = null;
         this.editors = (Objects.isNull(editors) || editors.isEmpty())
                 ? TownEditor.standardEditors() : editors;

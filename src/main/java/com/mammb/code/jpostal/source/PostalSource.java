@@ -75,6 +75,33 @@ public interface PostalSource {
     }
 
     /**
+     * Get the standard utf source.
+     * @return standard source
+     */
+    static PostalSource standardUtfSource() {
+
+        return new PostalSource() {
+
+            private final List<TownEditor> editors = new ArrayList<>();
+
+            @Override
+            public String url() {
+                return "https://www.post.japanpost.jp/zipcode/utf_all.csv";
+            }
+
+            @Override
+            public PostalSourceReader reader(Path path) {
+                return StandardUtfSourceLineReader.of(path, editors);
+            }
+
+            @Override
+            public void with(List<TownEditor> editors) {
+                this.editors.addAll(editors);
+            }
+        };
+    }
+
+    /**
      * Get the office source.
      * @return office source
      */

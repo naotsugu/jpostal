@@ -36,12 +36,13 @@ public abstract class PostalSourceReader implements Closeable {
     /**
      * Constructor.
      * @param path path of file
+     * @param charset the charset of source
      */
-    protected PostalSourceReader(Path path) {
+    protected PostalSourceReader(Path path, Charset charset) {
         Objects.requireNonNull(path);
         try {
-            this.bufferedReader = new BufferedReader(new InputStreamReader(
-                    Files.newInputStream(path), Charset.forName("Shift_JIS")));
+            this.bufferedReader = new BufferedReader(
+                new InputStreamReader(Files.newInputStream(path), charset));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,4 +70,5 @@ public abstract class PostalSourceReader implements Closeable {
     public void close() throws IOException {
         bufferedReader.close();
     }
+
 }
