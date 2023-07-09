@@ -76,9 +76,8 @@ out/
 *.zip
 *.tar.gz
 *.rar
-
-/*.csv
-/*.CSV
+*.csv
+*.CSV
 
 .DS_Store
 .AppleDouble

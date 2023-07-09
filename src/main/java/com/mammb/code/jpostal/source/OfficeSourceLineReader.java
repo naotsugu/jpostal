@@ -26,19 +26,18 @@ import java.util.Objects;
  */
 public class OfficeSourceLineReader extends PostalSourceReader {
 
-    private OfficeSourceLineReader(Path path, Charset charset) {
-        super(Objects.requireNonNull(path), Objects.requireNonNull(charset));
+    private OfficeSourceLineReader(Path path) {
+        super(Objects.requireNonNull(path), Charset.forName("Shift_JIS"));
     }
 
 
     /**
      * Create the {@code OfficeSourceLineReader} instance.
      * @param path the source path
-     * @param charset the charset of source
      * @return {@code OfficeSourceLineReader} instance
      */
-    public static OfficeSourceLineReader of(Path path, Charset charset) {
-        return new OfficeSourceLineReader(path, charset);
+    public static OfficeSourceLineReader of(Path path) {
+        return new OfficeSourceLineReader(path);
     }
 
 

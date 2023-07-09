@@ -19,6 +19,7 @@ import com.mammb.code.jpostal.source.AutoUpdater;
 import com.mammb.code.jpostal.source.PostalSource;
 import com.mammb.code.jpostal.source.PostalSourceFetcher;
 import com.mammb.code.jpostal.source.PostalSourceReader;
+import com.mammb.code.jpostal.source.Settings;
 import com.mammb.code.jpostal.source.SourceLine;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -123,6 +124,17 @@ public class Postal {
      */
     public Postal leftMatchLimitCount(int count) {
         this.settings.leftMatchLimitCount(count);
+        return this;
+    }
+
+
+    /**
+     * Set the useLegacySource.
+     * @param legacySource the useLegacySource
+     * @return {@code Postal}
+     */
+    public Postal useLegacySource(boolean legacySource) {
+        this.settings.useLegacySource(legacySource);
         return this;
     }
 

@@ -33,12 +33,12 @@ public class StandardSourceLineEditor implements SourceLine {
 
     private static final System.Logger log = System.getLogger(StandardSourceLineEditor.class.getName());
 
-    private final StandardSourceLine pear;
+    private final StandardSourceLine peer;
     private final List<TownEditor> rules;
 
 
-    private StandardSourceLineEditor(StandardSourceLine pear, List<TownEditor> rules) {
-        this.pear = pear;
+    private StandardSourceLineEditor(StandardSourceLine peer, List<TownEditor> rules) {
+        this.peer = peer;
         this.rules = rules;
     }
 
@@ -55,7 +55,7 @@ public class StandardSourceLineEditor implements SourceLine {
 
 
     private List<String> towns() {
-        return towns(rules.iterator(), Collections.singletonList(pear.town));
+        return towns(rules.iterator(), Collections.singletonList(peer.town));
     }
 
 
@@ -65,7 +65,7 @@ public class StandardSourceLineEditor implements SourceLine {
             TownEditor editor = iterator.next();
 
             List<String> edited = list.stream()
-                    .map(town -> editor.apply(town, pear))
+                    .map(town -> editor.apply(town, peer))
                     .flatMap(List::stream)
                     .collect(Collectors.toList());
 
@@ -84,12 +84,12 @@ public class StandardSourceLineEditor implements SourceLine {
         for (String town : towns()) {
             if (town.contains("（") && town.contains("）")) {
                 list.add(Address.of(
-                        PostalCode.of(pear.code), MunicipalId.of(pear.mccd), pear.pref, pear.city,
+                        PostalCode.of(peer.code), MunicipalId.of(peer.mccd), peer.pref, peer.city,
                         town.substring(0, town.indexOf('（')),
                         town.substring(town.indexOf('（') + 1, town.indexOf('）'))));
             } else {
                 list.add(Address.of(
-                        PostalCode.of(pear.code), MunicipalId.of(pear.mccd), pear.pref, pear.city, town, ""));
+                        PostalCode.of(peer.code), MunicipalId.of(peer.mccd), peer.pref, peer.city, town, ""));
             }
         }
         return list;

@@ -31,8 +31,8 @@ public class StandardSourceLineReader extends PostalSourceReader {
     private final List<TownEditor> editors;
 
 
-    private StandardSourceLineReader(Path path, Charset charset, List<TownEditor> editors) {
-        super(Objects.requireNonNull(path), Objects.requireNonNull(charset));
+    private StandardSourceLineReader(Path path, List<TownEditor> editors) {
+        super(Objects.requireNonNull(path), Charset.forName("Shift_JIS"));
         this.buffered = null;
         this.editors = (Objects.isNull(editors) || editors.isEmpty())
                 ? TownEditor.standardEditors() : editors;
@@ -41,23 +41,21 @@ public class StandardSourceLineReader extends PostalSourceReader {
     /**
      * Create the {@code StandardSourceLineReader} instance.
      * @param path the source path
-     * @param charset the charset of source
      * @param editors the list of {@code TownEditor}
      * @return the {@code StandardSourceLineReader} instance
      */
-    public static StandardSourceLineReader of(Path path, Charset charset, List<TownEditor> editors) {
-        return new StandardSourceLineReader(path, charset, editors);
+    public static StandardSourceLineReader of(Path path, List<TownEditor> editors) {
+        return new StandardSourceLineReader(path, editors);
     }
 
 
     /**
      * Create the {@code StandardSourceLineReader} instance.
      * @param path the source path
-     * @param charset the charset of source
      * @return the {@code StandardSourceLineReader} instance
      */
-    public static StandardSourceLineReader of(Path path, Charset charset) {
-        return new StandardSourceLineReader(path, charset, null);
+    public static StandardSourceLineReader of(Path path) {
+        return new StandardSourceLineReader(path, null);
     }
 
 
