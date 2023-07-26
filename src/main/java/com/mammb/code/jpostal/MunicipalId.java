@@ -78,6 +78,13 @@ public class MunicipalId implements Serializable {
 
     /**
      * Get the check digit.
+     * <p>
+     * 第1桁から第5桁までの数字に、それぞれ6.5.4.3.2を乗じて算出した積の和を求め、
+     * その和を11で除し、商と剰余（以下「余り数字」という。）を求めて、
+     * 11と余り数字との差の下1桁の数字を検査数字とする。
+     * ただし、積の和が11より小なるときは、検査数字は、11から積の和を控除した数字とする。
+     * https://www.soumu.go.jp/main_content/000137948.pdf
+     * </p>
      * @return the check digit
      */
     public int getCheckDigit() {
@@ -86,7 +93,8 @@ public class MunicipalId implements Serializable {
         int c = Integer.parseInt(municipalCode.substring(0, 1));
         int d = Integer.parseInt(municipalCode.substring(1, 2));
         int e = Integer.parseInt(municipalCode.substring(2, 3));
-        return ((a * 6) + (b * 5) + (c * 4) + (d * 3) + (e * 2)) / 11 - 11;
+        int sp = (a * 6) + (b * 5) + (c * 4) + (d * 3) + (e * 2);
+        return (11 - (sp % 11)) % 10;
     }
 
 

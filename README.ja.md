@@ -19,6 +19,7 @@
 * 住所情報の整形
 * 辞書の自動アップデート(月次)
 * REST web サーバ付属 
+* CSV 出力
 * 依存ライブラリ無し
 
 <br/>
@@ -53,6 +54,21 @@ Collection<Address> addresses = postal.get(code);
 
 <br/>
 
+## CSV file
+
+整形済みのCSVファイルを出力することができます.
+
+`-o` オプションで出力ファイル名を指定します。
+
+```
+$ java -jar jpostal-0.5.0.jar -o out.csv
+```
+
+`郵便番号,地方公共団体コード,都道府県名,市区町村名,町域名` の並びのCSVファイルを出力します。
+
+
+<br/>
+
 ## PostalServer
 
 REST サーバが必要な場合は jpostal.jar を実行します.
@@ -64,7 +80,7 @@ REST サーバが必要な場合は jpostal.jar を実行します.
 $ git clone https://github.com/naotsugu/jpostal.git
 $ cd jpostal
 $ ./gradlew jar
-$ java -jar build/libs/jpostal.jar
+$ java -jar build/libs/jpostal-0.5.0.jar
 ```
 
 または、`PostalServer` を使います. 

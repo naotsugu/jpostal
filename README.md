@@ -16,6 +16,7 @@ Japan postal code dictionary(so‐called ken_all.csv) utility.
 * Format address pretty well
 * Auto update support (monthly)
 * Minimal REST web server included 
+* CSV output
 * No dependencies (only jdk)
 
 <br/>
@@ -50,6 +51,20 @@ Collection<Address> addresses = postal.get(code);
 
 <br/>
 
+## CSV file
+
+You can output a formatted CSV file.
+
+The `-o` option specifies the output file name.
+
+```sh
+$ java -jar jpostal-0.5.0.jar -o out.csv
+```
+
+
+
+<br/>
+
 ## PostalServer
 
 If you needs rest server, run jpostal.jar.
@@ -58,11 +73,11 @@ Get `jpostal.jar` from `https://github.com/naotsugu/jpostal/releases` and run it
 
 Or clone and build and run.
 
-```
+```sh
 $ git clone https://github.com/naotsugu/jpostal.git
 $ cd jpostal
 $ ./gradlew jar
-$ java -jar build/libs/jpostal.jar
+$ java -jar build/libs/jpostal-0.5.0.jar
 ```
 
 Or use `PostalServer`. 

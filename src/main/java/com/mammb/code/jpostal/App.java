@@ -16,6 +16,10 @@
 package com.mammb.code.jpostal;
 
 import com.mammb.code.jpostal.server.PostalServer;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static java.lang.System.Logger.Level.*;
 
 /**
@@ -33,6 +37,11 @@ public class App {
      * @param args the args
      */
     public static void main(String[] args) {
+
+        if (args != null && args.length > 1 && args[0].equals("-o")) {
+            writeCsv(args[1]);
+            System.exit(0);
+        }
 
         Postal postal = Postal.of()
             .useLegacySource(false)
@@ -53,6 +62,37 @@ public class App {
         server.start();
 
         log.log(INFO, "http://localhost:8080/postal/console.html");
+
+    }
+
+
+    private static void writeCsv(String pathString) {
+
+        if (pathString == null || !pathString.endsWith(".csv")) {
+            log.log(ERROR, "illegal path [{0}]", pathString);
+            System.exit(1);
+        }
+
+        Path path = Path.of(pathString);
+        if (Files.isDirectory(path) || !path.toString().endsWith(".csv")) {
+            log.log(ERROR, "Illegal path.[{0}]", path);
+            System.exit(1);
+        }
+        if (Files.exists(path)) {
+            log.log(ERROR, "File already exists.[{0}]", path);
+            System.exit(1);
+        }
+
+        Postal postal = Postal.of();
+
+        log.log(INFO, "initializing...");
+
+        postal.initialize();
+
+        log.log(INFO, "initialized");
+
+        log.log(INFO, "write csv [{0}]", path.toString());
+        postal.writerCsv(path);
 
     }
 
