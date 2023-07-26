@@ -21,10 +21,15 @@ import com.mammb.code.jpostal.source.PostalSourceFetcher;
 import com.mammb.code.jpostal.source.PostalSourceReader;
 import com.mammb.code.jpostal.source.Settings;
 import com.mammb.code.jpostal.source.SourceLine;
+
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -36,6 +41,7 @@ import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Collectors;
 
 import static java.lang.System.Logger.Level.*;
 
@@ -220,6 +226,37 @@ public class Postal {
      */
     public boolean leftMatchSupport() {
         return settings.leftMatchSupport();
+    }
+
+
+    /**
+     * Write CSV file.
+     * @param path the path of CSV file
+     */
+    public void writerCsv(Path path) {
+
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
+
+            for (Address address : map.values().stream().flatMap(Collection::stream)
+                    .sorted(Comparator.comparing(Address::getCode)).collect(Collectors.toList())) {
+                writer.write(address.getCode().getCode());
+                writer.write(",");
+                writer.write(address.getMunicipalId().getCode());
+                writer.write(",");
+                writer.write(address.getPrefecture());
+                writer.write(",");
+                writer.write(address.getCity());
+                writer.write(",");
+                writer.write(address.getTown());
+                writer.write(",");
+                writer.write(address.getStreet());
+                writer.newLine();
+            }
+            writer.flush();
+        } catch (IOException e) {
+            log.log(ERROR, "IOException", e);
+            System.exit(1);
+        }
     }
 
 

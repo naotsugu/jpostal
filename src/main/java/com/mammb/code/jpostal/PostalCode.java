@@ -23,7 +23,7 @@ import java.util.Objects;
  *
  * @author naotsugu
  */
-public class PostalCode implements Serializable {
+public class PostalCode implements Serializable, Comparable<PostalCode> {
 
     /** postal code value. */
     private final String code;
@@ -77,6 +77,11 @@ public class PostalCode implements Serializable {
         return "PostalCode{" +
                 "code='" + code + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(PostalCode other) {
+        return code.compareTo(other.code);
     }
 
 }
