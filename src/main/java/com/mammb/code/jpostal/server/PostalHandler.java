@@ -68,7 +68,7 @@ class PostalHandler implements HttpHandler {
             if (matcher.find()) {
                 String code = matcher.group(1).replace("-", "");
                 Collection<Address> addresses = postal.get(code);
-                if (Objects.nonNull(addresses) && addresses.size() > 0) {
+                if (Objects.nonNull(addresses) && !addresses.isEmpty()) {
                     sb.append("[");
                     for (Address address : addresses) {
                         sb.append(address.toJsonString());

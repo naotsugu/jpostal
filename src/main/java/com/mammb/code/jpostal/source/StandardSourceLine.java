@@ -56,7 +56,7 @@ class StandardSourceLine implements SourceLine {
 
     private StandardSourceLine(String str) {
 
-        if (Objects.isNull(str) || str.length() == 0) {
+        if (Objects.isNull(str) || str.isEmpty()) {
             return;
         }
 

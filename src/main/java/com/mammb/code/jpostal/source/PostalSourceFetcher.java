@@ -121,9 +121,10 @@ public class PostalSourceFetcher {
             Files.createDirectories(unzipLocation);
         }
         try (ZipInputStream zipInputStream = new ZipInputStream(
-                Files.newInputStream(zipPath),
-                charset)) {
+                Files.newInputStream(zipPath), charset)) {
+
             ZipEntry entry = zipInputStream.getNextEntry();
+
             while (entry != null) {
                 Path filePath = unzipLocation.resolve(entry.getName());
                 if (!entry.isDirectory()) {
@@ -141,6 +142,7 @@ public class PostalSourceFetcher {
     private static void unzipFiles(
             final ZipInputStream zipInputStream,
             final Path unzipFilePath) throws IOException {
+
         try (BufferedOutputStream bos = new BufferedOutputStream(
                 Files.newOutputStream(Paths.get(unzipFilePath.toAbsolutePath().toString())))) {
             byte[] bytesIn = new byte[1024 * 5];
@@ -149,6 +151,7 @@ public class PostalSourceFetcher {
                 bos.write(bytesIn, 0, read);
             }
         }
+
     }
 
 }

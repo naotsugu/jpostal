@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author naotsugu
  */
-public interface TownEditor {
+interface TownEditor {
 
     /** The result of empty. */
     List<String> empty = List.of("");

@@ -25,10 +25,10 @@ import java.util.Objects;
 public class MunicipalId implements Serializable {
 
     /** Prefecture code. */
-    private String prefCode;
+    private final String prefCode;
 
     /** Municipality code. */
-    private String municipalCode;
+    private final String municipalCode;
 
 
     private MunicipalId(String prefCode, String municipalCode) {
