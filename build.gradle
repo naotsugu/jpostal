@@ -1,8 +1,10 @@
+import com.vanniktech.maven.publish.JavaLibrary
+import com.vanniktech.maven.publish.JavadocJar
+
 plugins {
     id 'java'
     id 'application'
-    id 'maven-publish'
-    id 'signing'
+    id "com.vanniktech.maven.publish" version "0.34.0"
 }
 
 group = 'com.mammb'
@@ -40,55 +42,41 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
     }
-    withJavadocJar()
-    withSourcesJar()
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'jpostal'
-            from components.java
-            pom {
-                name = 'JPostal'
-                description = 'Japan postal code dictionary utility'
-                url = 'https://github.com/naotsugu/jpostal'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'naotsugu'
-                        name = 'Naotsugu Kobayashi'
-                        email = 'naotsugukobayashi@gmail.com'
-                    }
-                }
-                scm {
-                    connection = 'git@github.com:naotsugu/jpostal.git'
-                    developerConnection = 'git@github.com:naotsugu/jpostal.git'
-                    url = 'https://github.com/naotsugu/jpostal'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            credentials {
-                username = project.properties['sonatypeUsername'] ?: ""
-                password = project.properties['sonatypePassword'] ?: ""
-            }
-        }
-    }
-}
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
 
-signing {
-    sign publishing.publications.mavenJava
+    coordinates(group.toString(), "jpostal", version.toString())
+    mavenPublishing {
+        configure(new JavaLibrary(new JavadocJar.Javadoc(), true))
+    }
+    pom {
+        name = "JPostal"
+        description = "Japan postal code dictionary utility."
+        inceptionYear = "2020"
+        url = "https://github.com/naotsugu/jpostal"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "naotsugu"
+                name = "Naotsugu Kobayashi"
+                url = "https://github.com/naotsugu/"
+            }
+        }
+        scm {
+            url = "https://github.com/naotsugu/jpostal/"
+            connection = "scm:git:git://github.com/naotsugu/jpostal.git"
+            developerConnection = "scm:git:ssh://git@github.com/naotsugu/jpostal.git"
+        }
+    }
 }
 
 javadoc {
