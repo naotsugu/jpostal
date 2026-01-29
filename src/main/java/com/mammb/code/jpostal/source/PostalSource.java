@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2022 the original author or authors.
+ * Copyright 2002-2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public interface PostalSource {
 
     /**
      * Get the {@code PostalSourceReader}.
-     * @param path the path of source csv file
+     * @param path the path of a source csv file
      * @return the {@code PostalSourceReader}
      */
     PostalSourceReader reader(Path path);
@@ -59,7 +59,10 @@ public interface PostalSource {
 
             @Override
             public String url() {
-                return "https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip";
+                var url = System.getProperty("com.mammb.code.jpostal.source.standard.url");
+                return (url == null || url.isBlank())
+                    ? "https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip"
+                    : url;
             }
 
             @Override
@@ -86,7 +89,10 @@ public interface PostalSource {
 
             @Override
             public String url() {
-                return "https://www.post.japanpost.jp/zipcode/utf_all.csv";
+                var url = System.getProperty("com.mammb.code.jpostal.source.standardUtf.url");
+                return (url == null || url.isBlank())
+                    ? "https://www.post.japanpost.jp/zipcode/dl/utf/zip/utf_ken_all.zip"
+                    : url;
             }
 
             @Override
@@ -111,7 +117,10 @@ public interface PostalSource {
 
             @Override
             public String url() {
-                return "https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip";
+                var url = System.getProperty("com.mammb.code.jpostal.source.office.url");
+                return (url == null || url.isBlank())
+                    ? "https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip"
+                    : url;
             }
 
             @Override
