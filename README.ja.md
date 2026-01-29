@@ -30,7 +30,7 @@
 
 ```groovy
 dependencies {
-    implementation 'com.mammb:jpostal:0.5.0'
+    implementation 'com.mammb:jpostal:0.5.1'
 }
 ```
 
