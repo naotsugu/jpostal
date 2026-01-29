@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2022 the original author or authors.
+ * Copyright 2002-2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,14 +70,14 @@ public class PostalSourceFetcher {
 
     /**
      * Fetch the postal dictionary csv.
-     * @return the path of fetched file
+     * @return the path of a fetched file
      */
     public Path fetch() {
         Path path = baseDir.resolve(fetchedPath(sourceUrl));
         if (!(recycle && Files.exists(path))) {
             path = fetch(sourceUrl, path);
         }
-        return path.endsWith(".zip") ? unzip(path) : path;
+        return path.toString().endsWith(".zip") ? unzip(path) : path;
     }
 
 
