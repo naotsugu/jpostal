@@ -2,6 +2,10 @@
 
 # jpostal
 
+* Read this in other languages: [日本語](README.ja.md)
+
+![jpostal](doc/images/search.gif)
+
 The postal code dictionary (ken_all.csv) provided by Japan Post is not suitable for use as a postal code master file as it is.
 
 For example, the town name field contains descriptions that are inappropriate for master data, such as "以下に掲載がない場合" or "白浜町の次に番地がくる場合".
@@ -19,7 +23,6 @@ There are many other such inappropriate descriptions, and complex processing is 
 
 **[Important]** From May 2025, Japan Post will provide a "Postal Code/Digital Address API". For cases such as suggesting addresses from postal codes, it is recommended to use this API. `jpostal` is particularly useful for offline use or when you want to apply your own processing logic.
 
-![jpostal](doc/images/search.gif)
 
 <br/>
 
