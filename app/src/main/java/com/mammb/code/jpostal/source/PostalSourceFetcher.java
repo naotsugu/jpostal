@@ -26,6 +26,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -77,7 +79,7 @@ public class PostalSourceFetcher {
         if (!(recycle && Files.exists(path))) {
             path = fetch(sourceUrl, path);
         }
-        return path.toString().endsWith(".zip") ? unzip(path) : path;
+        return path.toString().toLowerCase().endsWith(".zip") ? unzip(path) : path;
     }
 
 
@@ -97,10 +99,38 @@ public class PostalSourceFetcher {
         return toPath;
     }
 
-
+    /**
+     * Extracts a ZIP file to a temporary directory and returns the path to the extracted file.
+     * This method ensures that the temporary directory is cleaned up at JVM shutdown.
+     *
+     * @param zipPath the path to the ZIP file to be extracted
+     * @return the path to the extracted file located within the temporary directory
+     * @throws RuntimeException if an error occurs during the extraction process
+     */
     private static Path unzip(final Path zipPath) {
         try {
-            Path tempDir = Files.createTempDirectory(PostalSource.class.getSimpleName() + ".");
+            final Path tempDir = Files.createTempDirectory(PostalSource.class.getSimpleName() + ".");
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                if (!Files.exists(tempDir)) {
+                    return;
+                }
+                try (Stream<Path> walk = Files.walk(tempDir)) {
+                    walk.sorted(Comparator.reverseOrder())
+                        .forEach(path -> {
+                            try {
+                                Files.delete(path);
+                            } catch (IOException ignore) { }
+                        });
+                } catch (IOException ignore) { }
+            }));
+            return unzip(zipPath, tempDir);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Path unzip(final Path zipPath, Path tempDir) {
+        try {
             unzip(zipPath, tempDir, StandardCharsets.UTF_8);
             return Files.list(tempDir)
                 .filter(p -> p.getFileName().toString().toLowerCase().endsWith(".csv"))

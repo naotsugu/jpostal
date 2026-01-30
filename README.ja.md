@@ -78,7 +78,7 @@ Collection<Address> addresses = postal.get(code);
 `-o` オプションで出力ファイル名を指定します。
 
 ```bash
-$ java -jar jpostal-0.5.1.jar -o out.csv
+java -jar jpostal-0.5.1.jar -o out.csv
 ```
 
 出力されるCSVファイルのフォーマットは `郵便番号,地方公共団体コード,都道府県名,市区町村名,町域名` です。
@@ -93,13 +93,13 @@ RESTサーバーとして利用する場合は、`jpostal.jar` を直接実行�
 
 ```bash
 # プロジェクトをクローンしてビルド・実行する場合
-$ git clone https://github.com/naotsugu/jpostal.git
-$ cd jpostal
-$ ./gradlew jar
-$ java -jar app/build/libs/jpostal-0.5.1.jar
+git clone https://github.com/naotsugu/jpostal.git
+cd jpostal
+./gradlew jar
+java -jar app/build/libs/jpostal-0.5.1.jar
 
 # ダウンロードしたjarを実行する場合
-$ java -jar jpostal-0.5.1.jar
+java -jar jpostal-0.5.1.jar
 ```
 
 Javaの最低バージョンはJDK 11です。ビルドにはJDK 21以下が必要です(Gradle のバージョン制約のため)。
@@ -147,11 +147,11 @@ Postal postal = Postal.of()
 
 `jpostal.jar` を実行するディレクトリ、または指定されたデータディレクトリに `ken_all.zip` または `utf_all.zip` が存在する場合、そのファイルが利用されます。
 
-ファイルが存在しない場合は、日本郵政の辞書ファイルを自動でダウンロードします.
-ダウンロードしたファイルは `jpostal.jar` 実行時のディレクトリにダウンロードされるため、次回起動時にはこのファイルを使うようになります.
+ファイルが存在しない場合は、日本郵政の辞書ファイルを自動でダウンロードします。
+ダウンロードしたファイルは `jpostal.jar` 実行時のディレクトリにダウンロードされるため、次回起動時にはこのファイルを使うようになります。
 
 ダウンロードするファイルは「住所の郵便番号（1レコード1行、UTF-8形式）（CSV形式）」です。
-`useLegacySource` に `true` を指定した場合には「読み仮名データの促音・拗音を小書きで表記するもの」の全国版を使用します.
+`useLegacySource` に `true` を指定した場合には「読み仮名データの促音・拗音を小書きで表記するもの」の全国版を使用します。
 
 デフォルトでダウンロードされるファイルは「住所の郵便番号（1レコード1行、UTF-8形式）（CSV形式）」です。
 `useLegacySource` を `true` に設定した場合は、「読み仮名データの促音・拗音を小書きで表記するもの」の全国版が使用されます。
