@@ -49,7 +49,7 @@ Add the following dependency to your `build.gradle.kts`.
 
 ```kotlin
 dependencies {
-    implementation("com.mammb:jpostal:0.5.1")
+    implementation("com.mammb:jpostal:0.5.2")
 }
 ```
 
@@ -81,7 +81,7 @@ You can output the formatted postal code data as a CSV file.
 Specify the output file name with the `-o` option.
 
 ```bash
-java -jar jpostal-0.5.1.jar -o out.csv
+java -jar jpostal-0.5.2.jar -o out.csv
 ```
 
 The format of the output CSV file is `Postal code,Local government code,Prefecture name,City name,Town name`.
@@ -99,10 +99,10 @@ Build and run the project, or download and run `jpostal.jar` from `https://githu
 git clone https://github.com/naotsugu/jpostal.git
 cd jpostal
 ./gradlew jar
-java -jar app/build/libs/jpostal-0.5.1.jar
+java -jar app/build/libs/jpostal-0.5.2.jar
 
 # When running the downloaded jar
-java -jar jpostal-0.5.1.jar
+java -jar jpostal-0.5.2.jar
 ```
 
 The minimum Java version is JDK 11. JDK 21 or lower is required for building.

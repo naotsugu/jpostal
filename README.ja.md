@@ -46,7 +46,7 @@
 
 ```kotlin
 dependencies {
-    implementation("com.mammb:jpostal:0.5.1")
+    implementation("com.mammb:jpostal:0.5.2")
 }
 ```
 
@@ -78,7 +78,7 @@ Collection<Address> addresses = postal.get(code);
 `-o` オプションで出力ファイル名を指定します。
 
 ```bash
-java -jar jpostal-0.5.1.jar -o out.csv
+java -jar jpostal-0.5.2.jar -o out.csv
 ```
 
 出力されるCSVファイルのフォーマットは `郵便番号,地方公共団体コード,都道府県名,市区町村名,町域名` です。
@@ -96,10 +96,10 @@ RESTサーバーとして利用する場合は、`jpostal.jar` を直接実行�
 git clone https://github.com/naotsugu/jpostal.git
 cd jpostal
 ./gradlew jar
-java -jar app/build/libs/jpostal-0.5.1.jar
+java -jar app/build/libs/jpostal-0.5.2.jar
 
 # ダウンロードしたjarを実行する場合
-java -jar jpostal-0.5.1.jar
+java -jar jpostal-0.5.2.jar
 ```
 
 Javaの最低バージョンはJDK 11です。ビルドにはJDK 21以下が必要です(Gradle のバージョン制約のため)。
