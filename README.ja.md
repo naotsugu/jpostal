@@ -2,46 +2,47 @@
 
 # jpostal
 
-日本郵政の提供する郵便番号辞書(ken_all.csv)は郵便番号マスタファイルとして利用するには不適切です.
+日本郵政が提供する郵便番号辞書（ken_all.csv）は、そのままでは郵便番号マスタファイルとして利用するのに適していません。
 
-例えば以下のように、町域名の項目に `以下に掲載がない場合` や `白浜町の次に番地がくる場合` といった、郵便番号マスタファイルとしては不適切な内容が登録されています.
+例えば、町域名の項目には「以下に掲載がない場合」や「白浜町の次に番地がくる場合」といった、マスタデータとしては不適切な記述が含まれています。
 
 ```csv
 ..,"6492200",..,"和歌山県","西牟婁郡白浜町","以下に掲載がない場合",0,0,0,0,0,0
 ..,"6492211",..,"和歌山県","西牟婁郡白浜町","白浜町の次に番地がくる場合",0,0,0,0,0,0
 ```
 
-このような不適切な記載は、その他にも多くのパターンがあり、郵便番号マスタファイルとして利用するには、泥臭い加工処理が必要になります.
+このような不適切な記載は多岐にわたり、郵便番号マスタとして利用するには複雑な加工処理が必要です。
 
 <br/>
 
-jpostal は、ken_all.csv に含まれる不適切な記載パターンを可能な限り整形し、郵便番号マスタとして活用できるようにするユーティリティです.
+`jpostal` は、`ken_all.csv` に含まれる不適切な記載パターンを可能な限り整形し、郵便番号マスタとして活用できるようにするユーティリティライブラリです。
 
-なお、2025年5月からは、日本郵政から、「郵便番号・デジタルアドレスAPI」が提供されています。
-郵便番号から住所をサジェストするようなケースでは、「郵便番号・デジタルアドレスAPI」を利用したほうが良いです。
+**【重要】** 2025年5月より、日本郵政から「郵便番号・デジタルアドレスAPI」が提供されています。郵便番号から住所をサジェストするようなケースでは、このAPIの利用を推奨します。`jpostal` は、オフライン環境での利用や、独自の加工ロジックを適用したい場合に特に有用です。
 
 ![jpostal](doc/images/search.gif)
 
 <br/>
 
-## Feature
+## Features
 
-* japanpost.jp から辞書 csv を自動ダウンロード
-* 辞書データは以下を選択可能
-  * 「住所の郵便番号（1レコード1行、UTF-8形式）（CSV形式）」(`utf_all.csv`)
-  * 「読み仮名データの促音・拗音を小書きで表記するもの」(`ken_all.zip`)
-  * 「事業所の個別郵便番号」(`jigyosyo.zip`)
-* 住所情報の整形
-* 辞書の自動アップデート(月次)
-* REST web サーバ付属 
-* CSV 出力
-* 依存ライブラリ無し
+*   日本郵政のWebサイトから辞書CSVを自動ダウンロード
+*   以下の辞書データを選択可能:
+    *   「住所の郵便番号（1レコード1行、UTF-8形式）」（`utf_all.csv`）
+    *   「読み仮名データの促音・拗音を小書きで表記するもの」（`ken_all.zip`）
+    *   「事業所の個別郵便番号」（`jigyosyo.zip`）
+*   住所情報の高度な整形処理
+*   辞書の自動アップデート機能（月次）
+*   REST Webサーバー機能付属
+*   整形済みCSVファイル出力機能
+*   外部依存ライブラリなし
 
 <br/>
 
 ## Usage
 
-以下の依存を追加します.
+### ライブラリとして利用
+
+以下の依存関係を追加します。
 
 ```kotlin
 dependencies {
@@ -56,66 +57,68 @@ Postal postal = Postal.of();
 postal.initialize();
 ```
 
-生成したインスタンスに郵便番号のクエリを渡すことで、候補の郵便番号と住所が取得することができます.
+生成したインスタンスに郵便番号のクエリを渡すことで、候補の郵便番号と住所を取得できます。
 
 ```java
 String code = "105001";
 Collection<Address> addresses = postal.get(code);
-//[{"code": "1050011", "prefecture": "東京都", "city": "港区", "town": "芝公園", "street": ""},
-// {"code": "1050012", "prefecture": "東京都", "city": "港区", "town": "芝大門", "street": ""},
-// {"code": "1050013", "prefecture": "東京都", "city": "港区", "town": "浜松町", "street": ""}, 
-// {"code": "1050014", "prefecture": "東京都", "city": "港区", "town": "芝", "street": ""}]
+// 取得例:
+// [{"code": "1050011", "prefecture": "東京都", "city": "港区", "town": "芝公園", "street": ""},
+//  {"code": "1050012", "prefecture": "東京都", "city": "港区", "town": "芝大門", "street": ""},
+//  {"code": "1050013", "prefecture": "東京都", "city": "港区", "town": "浜松町", "street": ""},
+//  {"code": "1050014", "prefecture": "東京都", "city": "港区", "town": "芝", "street": ""}]
 ```
 
 <br/>
 
-## CSV file
+### CSVファイル出力
 
-整形済みのCSVファイルを出力することができます.
+整形済みの郵便番号データをCSVファイルとして出力できます。
 
 `-o` オプションで出力ファイル名を指定します。
 
-```
-$ java -jar jpostal-0.5.0.jar -o out.csv
+```bash
+$ java -jar jpostal-0.5.1.jar -o out.csv
 ```
 
-`郵便番号,地方公共団体コード,都道府県名,市区町村名,町域名` の並びのCSVファイルを出力します。
-
+出力されるCSVファイルのフォーマットは `郵便番号,地方公共団体コード,都道府県名,市区町村名,町域名` です。
 
 <br/>
 
-## PostalServer
+### REST Webサーバー
 
-REST サーバが必要な場合は jpostal.jar を実行します.
+RESTサーバーとして利用する場合は、`jpostal.jar` を直接実行します。
 
-直接ビルドして実行するか、`https://github.com/naotsugu/jpostal/releases` から `jpostal.jar` をダウンロードして実行します.
+プロジェクトをビルドして実行するか、`https://github.com/naotsugu/jpostal/releases` から `jpostal.jar` をダウンロードして実行してください。
 
-```
+```bash
+# プロジェクトをクローンしてビルド・実行する場合
 $ git clone https://github.com/naotsugu/jpostal.git
 $ cd jpostal
 $ ./gradlew jar
 $ java -jar app/build/libs/jpostal-0.5.1.jar
+
+# ダウンロードしたjarを実行する場合
+$ java -jar jpostal-0.5.1.jar
 ```
 
-Java の最低バージョンは JDK 11 を対象としているため、ビルドには JDK 21 以下が必要です.
+Javaの最低バージョンはJDK 11です。ビルドにはJDK 21以下が必要です(Gradle のバージョン制約のため)。
 
-
-`PostalServer` を直接使うこともできます. 
+`PostalServer` クラスを直接利用することも可能です。
 
 ```java
 PostalServer server = PostalServer.of(postal);
 server.start();
 ```
 
-`http://localhost:8080/postal/105001` のようにアクセスすることで json フォーマットで結果を取得することができます.
-
-`http://localhost:8080/postal/console.html` にアクセスすれば簡易的な住所チェック用のコンソールが表示されます.
+サーバー起動後、`http://localhost:8080/postal/105001` のようにアクセスすることでJSON形式で結果を取得できます。
+また、`http://localhost:8080/postal/console.html` にアクセスすると、簡易的な住所チェック用コンソールが表示されます。
 
 <br/>
 
-## Options
+## 設定オプション
 
-以下のオプションがあります.
+`Postal` インスタンス生成時に以下のオプションを設定できます。
 
 ```java
 Postal postal = Postal.of()
@@ -127,22 +130,22 @@ Postal postal = Postal.of()
     .autoUpdateSupport(true);
 ```
 
-| Option                 | Default | Description                                                                                         |
-| ---------------------- |---------|-----------------------------------------------------------------------------------------------------|
-| `useLegacySource`   | `false` | 2023年6月から提供開始された、1レコード1行、UTF-8形式ファイルを使用するか、旧来形式ファイルを使用するかを指定します。`true` とした場合、旧来形式のファイルをソースとして使用します。 |
-| `fineAddressSupport`   | `true`  | 詳細な住所加工を行うかどうかを指定します                                                                                |
-| `leftMatchSupport`     | `true`  | 住所の前方一致検索を有効にします                                                                                    |
-| `leftMatchLimitCount`  | `20`    | 前方一致検索時の検索結果数を指定します                                                                                 |
-| `officeSourceSupport`  | `false` | 事業所の個別郵便番号をサポートするかどうかを指定します                                                                         |
-| `autoUpdateSupport`    | `false` | 郵便番号辞書の自動更新を有効にするかどうかを指定します                                                                         |
+| Option                | Default | 説明                                                                                                                            |
+| :-------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------ |
+| `useLegacySource`     | `false` | 2023年6月以降に提供開始された「1レコード1行、UTF-8形式ファイル」を使用するか、旧来形式ファイルを使用するかを指定します。`true` に設定すると旧来形式のファイルがソースとして使用されます。 |
+| `fineAddressSupport`  | `true`  | 詳細な住所加工を行うかどうかを指定します。                                                                                    |
+| `leftMatchSupport`    | `true`  | 郵便番号の前方一致検索を有効にするかどうかを指定します。                                                                        |
+| `leftMatchLimitCount` | `20`    | 前方一致検索時の検索結果の最大件数を指定します。                                                                              |
+| `officeSourceSupport` | `false` | 事業所の個別郵便番号データをサポートするかどうかを指定します。                                                                  |
+| `autoUpdateSupport`   | `false` | 郵便番号辞書の自動更新を有効にするかどうかを指定します（デフォルトでは無効）。                                                  |
 
 <br/>
 
-## Details
+## 詳細
 
 ### 辞書のダウンロード
 
-`jpostal.jar` 実行時のディレクトリに `ken_all.zip` または `utf_all.zip` が存在する場合は、このファイルを利用します。
+`jpostal.jar` を実行するディレクトリ、または指定されたデータディレクトリに `ken_all.zip` または `utf_all.zip` が存在する場合、そのファイルが利用されます。
 
 ファイルが存在しない場合は、日本郵政の辞書ファイルを自動でダウンロードします.
 ダウンロードしたファイルは `jpostal.jar` 実行時のディレクトリにダウンロードされるため、次回起動時にはこのファイルを使うようになります.
@@ -150,51 +153,48 @@ Postal postal = Postal.of()
 ダウンロードするファイルは「住所の郵便番号（1レコード1行、UTF-8形式）（CSV形式）」です。
 `useLegacySource` に `true` を指定した場合には「読み仮名データの促音・拗音を小書きで表記するもの」の全国版を使用します.
 
-オプションで `officeSourceSupport` が有効化されていた場合は「事業所の個別郵便番号」`jigyosyo.zip` を加えて扱います.
+デフォルトでダウンロードされるファイルは「住所の郵便番号（1レコード1行、UTF-8形式）（CSV形式）」です。
+`useLegacySource` を `true` に設定した場合は、「読み仮名データの促音・拗音を小書きで表記するもの」の全国版が使用されます。
 
+`officeSourceSupport` オプションが有効化されている場合は、「事業所の個別郵便番号」（`jigyosyo.zip`）も合わせて扱われます。
 
 ### 辞書の取得元
 
-辞書の取得元は、デフォルトで以下のように定義されています.
+辞書の取得元URLは、デフォルトで以下のように定義されています。
+システムプロパティを定義することで、取得元URLを変更できます。
 
-取得元を変更する場合は、システムプロパティを定義することで変更することができます.
-
-| 項目             | ソースURL                                                                | システムプロパティ                           |
-|----------------|-----------------------------------------------------------------------|-------------------------------------------------|
-| 住所の郵便番号        | `https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip`     | `com.mammb.code.jpostal.source.standard.url`    |
-| 住所の郵便番号(UTF形式) | `https://www.post.japanpost.jp/zipcode/dl/utf/zip/utf_ken_all.zip`    | `com.mammb.code.jpostal.source.standardUtf.url` |
-| 事業所の個別郵便番号     | `https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip`  | `com.mammb.code.jpostal.source.office.url`      |
-
+| 項目                    | デフォルトソースURL                                                                | システムプロパティ                                  |
+| :---------------------- | :--------------------------------------------------------------------------------- | :-------------------------------------------------- |
+| 住所の郵便番号            | `https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip`                  | `com.mammb.code.jpostal.source.standard.url`        |
+| 住所の郵便番号(UTF形式)   | `https://www.post.japanpost.jp/zipcode/dl/utf/zip/utf_ken_all.zip`                 | `com.mammb.code.jpostal.source.standardUtf.url`     |
+| 事業所の個別郵便番号      | `https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip`               | `com.mammb.code.jpostal.source.office.url`          |
 
 ### 辞書の更新
 
-郵政郵便番号は月末に更新分が公開されます.
+日本郵政の郵便番号データは月末に更新分が公開されます。
 
-- `autoUpdateSupport` を有効にすることで月初(0時〜1時の間のランダムな時刻)に自動更新されます
-
+`autoUpdateSupport` オプションを `true` に設定することで、月初（0時〜1時の間のランダムな時刻）に辞書が自動更新されます。
 
 ### 郵便番号のマッチモード
 
-- `leftMatchSupport` を有効にした場合、前方一致で郵便番号を検索します
-- `leftMatchSupport` を無効にした場合は完全一致検索となります
+*   `leftMatchSupport` を `true` に設定した場合、郵便番号を前方一致で検索します。
+*   `leftMatchSupport` を `false` に設定した場合は、完全一致検索となります。
 
-前方一致検索で取得する結果件数は `leftMatchLimitCount` で指定します.
-
+前方一致検索で取得する結果の最大件数は `leftMatchLimitCount` で指定します。
 
 ### 住所情報の整形
 
-日本郵政の公開する郵便番号辞書はシステムでそのまま利用できる代物ではないため、各種の整形処理を行っています.
+日本郵政が公開する郵便番号辞書は、システムでそのまま利用するには不適切なデータが含まれるため、`jpostal` では各種の整形処理を行っています。
 
-複数行に分割されたレコードを合成した後、[`com.mammb.code.jpostal.source.TownEditor`](src/main/java/com/mammb/code/jpostal/source/TownEditor.java) にある変換処理を行います.
+複数行に分割されたレコードを合成した後、[`com.mammb.code.jpostal.source.TownEditor`](src/main/java/com/mammb/code/jpostal/source/TownEditor.java) にある変換処理が適用されます。
 
-
-例えば以下のようなレコードは、
+例えば、以下のようなレコードは、
 
 ```
 "0580343",..,"北海道","幌泉郡えりも町","東洋（油駒、南東洋、１３２～１５６、１５８～３５４、３６６、３６７番地）"
 ```
 
-以下のような住所情報として整形します.
+`fineAddressSupport` オプションが `true` の場合、以下のような住所情報として整形されます。
 
 ```
 "0580343",..,"北海道","幌泉郡えりも町","東洋","油駒"
@@ -204,12 +204,10 @@ Postal postal = Postal.of()
 "0580343",..,"北海道","幌泉郡えりも町","東洋",""
 ```
 
-`fineAddressSupport` オプションを無効にした場合は以下のように編集されます.
+`fineAddressSupport` オプションを `false` に設定した場合は、以下のように編集されます。
 
 ```
 "0580343",..,"北海道","幌泉郡えりも町","東洋",""
 ```
 
-なお、「事業所の個別郵便番号」については住所情報の編集は行いません.
-
-
+なお、「事業所の個別郵便番号」については、住所情報の編集は行われません。
