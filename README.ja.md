@@ -186,7 +186,7 @@ Postal postal = Postal.of()
 
 日本郵政が公開する郵便番号辞書は、システムでそのまま利用するには不適切なデータが含まれるため、`jpostal` では各種の整形処理を行っています。
 
-複数行に分割されたレコードを合成した後、[`com.mammb.code.jpostal.source.TownEditor`](src/main/java/com/mammb/code/jpostal/source/TownEditor.java) にある変換処理が適用されます。
+複数行に分割されたレコードを合成した後、[`com.mammb.code.jpostal.source.TownEditor`](app/src/main/java/com/mammb/code/jpostal/source/TownEditor.java) にある変換処理が適用されます。
 
 例えば、以下のようなレコードは、
 
