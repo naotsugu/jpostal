@@ -58,7 +58,7 @@ You can output a formatted CSV file.
 The `-o` option specifies the output file name.
 
 ```sh
-$ java -jar jpostal-0.5.0.jar -o out.csv
+$ java -jar jpostal-0.5.1.jar -o out.csv
 ```
 
 
@@ -77,7 +77,7 @@ Or clone and build and run.
 $ git clone https://github.com/naotsugu/jpostal.git
 $ cd jpostal
 $ ./gradlew jar
-$ java -jar build/libs/jpostal-0.5.0.jar
+$ java -jar app/build/libs/jpostal-0.5.1.jar
 ```
 
 Or use `PostalServer`. 

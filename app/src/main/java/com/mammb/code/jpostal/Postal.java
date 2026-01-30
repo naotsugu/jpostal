@@ -286,6 +286,7 @@ public class Postal {
         Path path = recycleFetchedFile
                 ? PostalSourceFetcher.recycleOf(source).fetch()
                 : PostalSourceFetcher.of(source).fetch();
+        log.log(INFO, "source path  [" + path + "]");
 
         try (PostalSourceReader reader = source.reader(path)) {
             for (;;) {
